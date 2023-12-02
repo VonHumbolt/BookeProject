@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.SearchHit;
 import org.springframework.data.elasticsearch.core.SearchHits;
+import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
 import org.springframework.data.elasticsearch.core.query.Criteria;
 import org.springframework.data.elasticsearch.core.query.CriteriaQuery;
 import org.springframework.stereotype.Repository;
@@ -28,8 +29,7 @@ public class RoleRepositoryImpl implements RoleRepository {
     }
 
     @Override
-    public Role addNewRole(String roleName) {
-        Role role = new Role(roleName);
+    public Role addNewRole(Role role) {
         return elasticsearchOperations.save(role);
     }
 
@@ -37,6 +37,8 @@ public class RoleRepositoryImpl implements RoleRepository {
     public void deleteRole(String roleName) {
         Criteria criteria = new Criteria("roleName").matches(roleName);
         CriteriaQuery query = new CriteriaQuery(criteria);
-        elasticsearchOperations.delete(query);
+        SearchHits<Role> search = elasticsearchOperations.search(query, Role.class);
+        List<Role> roleList = search.get().map(SearchHit::getContent).toList();
+        elasticsearchOperations.delete(roleList.get(0), IndexCoordinates.of("role"));
     }
 }

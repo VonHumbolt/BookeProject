@@ -51,7 +51,7 @@ public class RegistrableUserServiceImpl implements RegistrableUserService, UserD
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         RegistrableUser user = registrableUserRepository.getUserByEmail(email);
         log.info("loadUserByUsername ---> user: " + user);
-
+        System.out.println("loadUserByUsername ---> user: " + user);
         if(user == null)
             throw new UsernameNotFoundException(Constant.USER_DOES_NOT_EXIST_WITH_GIVEN_EMAIL);
 

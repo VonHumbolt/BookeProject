@@ -6,7 +6,7 @@ public interface RoleRepository {
 
     Role getRoleByName(String roleName);
 
-    Role addNewRole(String roleName);
+    Role addNewRole(Role role);
 
     void deleteRole(String roleName);
 }

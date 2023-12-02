@@ -1,10 +1,12 @@
 package com.kaankaplan.booke.modals;
 
+import lombok.ToString;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@ToString
 @Document(indexName = "reader")
 public class Reader extends RegistrableUser {
 
@@ -17,7 +19,7 @@ public class Reader extends RegistrableUser {
     public List<Reader> followers;
 
     public Reader(String fullName, String email, String password, Role role) {
-        super(fullName, email, password);
+        super(fullName, email, password, role);
         this.profileImageUrl = "DEFAULT_PROFILE_PICTURE_URL";
         this.readBooks = new ArrayList<>();
         this.currentlyBooks = new ArrayList<>();

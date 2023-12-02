@@ -1,10 +1,12 @@
 package com.kaankaplan.booke.modals;
 
+import lombok.ToString;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@ToString
 @Document(indexName = "registrable_user")
 public class RegistrableUser extends User{
 
@@ -25,11 +27,9 @@ public class RegistrableUser extends User{
         this.posts = new ArrayList<>();
     }
 
+    public RegistrableUser() { }
+
     public String getPassword() {
         return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 }
