@@ -14,9 +14,13 @@ public class Post {
 
     @Id
     private String postId;
-    public RegistrableUser user;
+    public String userId;
+    public String fullName;
+    public String profilePictureUrl;
     public String activity;
-    public Book book;
+    public String bookName;
+    public String authorName;
+    public String bookImageUrl;
     public int likeCount;
     public List<Comment> comments;
     @Field(name="published_date", type = FieldType.Date)
@@ -28,10 +32,15 @@ public class Post {
         this.publishedDate = new Date();
     }
 
-    public Post(RegistrableUser user, String activity, Book book) {
-        this.user = user;
+    public Post(String userId, String fullName, String profilePictureUrl, String activity,
+                String bookName, String authorName, String bookImageUrl) {
+        this.userId = userId;
+        this.fullName = fullName;
+        this.profilePictureUrl = profilePictureUrl;
         this.activity = activity;
-        this.book = book;
+        this.bookName = bookName;
+        this.authorName = authorName;
+        this.bookImageUrl = bookImageUrl;
     }
 
     public Post() {
@@ -39,5 +48,9 @@ public class Post {
 
     public String getPostId() {
         return postId;
+    }
+
+    public Date getPublishedDate() {
+        return publishedDate;
     }
 }

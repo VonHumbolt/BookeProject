@@ -17,4 +17,9 @@ public class ReaderRepositoryImpl implements ReaderRepository {
     public Reader saveReader(Reader reader) {
         return elasticsearchOperations.save(reader);
     }
+
+    @Override
+    public Reader getReaderById(String userId) {
+        return elasticsearchOperations.get(userId, Reader.class);
+    }
 }

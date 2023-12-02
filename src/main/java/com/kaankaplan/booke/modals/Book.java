@@ -22,8 +22,7 @@ public class Book {
     public int pageNumber;
     public Author author;
     public List<String> genres;
-    @Field(name="publishedDate", type = FieldType.Date)
-    public Date publishedDate;
+    public int publishedDate;
     public String publisher;
     public Rating rating;
     public List<Review> reviews;
@@ -33,7 +32,7 @@ public class Book {
     }
 
     public Book(String title, String description, int pageNumber, Author author,
-                List<String> genres, Date publishedDate, String publisher) {
+                List<String> genres, int publishedDate, String publisher) {
         this.title = title;
         this.description = description;
         this.pageNumber = pageNumber;

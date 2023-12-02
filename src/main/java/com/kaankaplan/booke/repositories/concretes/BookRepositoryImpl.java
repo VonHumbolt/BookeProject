@@ -10,8 +10,6 @@ import org.springframework.data.elasticsearch.client.elc.NativeQuery;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.SearchHit;
 import org.springframework.data.elasticsearch.core.SearchHits;
-import org.springframework.data.elasticsearch.core.query.Criteria;
-import org.springframework.data.elasticsearch.core.query.CriteriaQuery;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -23,12 +21,13 @@ public class BookRepositoryImpl implements BookRepository {
     private final ElasticsearchOperations elasticsearchOperations;
 
     @Override
+    public Book save(Book book) {
+        return elasticsearchOperations.save(book);
+    }
+
+    @Override
     public Book getBookById(String bookId) {
-        Criteria criteria = new Criteria("bookId").matches(bookId);
-        CriteriaQuery query = new CriteriaQuery(criteria);
-        SearchHits<Book> search = elasticsearchOperations.search(query, Book.class);
-        List<Book> bookList = search.get().map(SearchHit::getContent).toList();
-        return bookList.size() > 0 ? bookList.get(0) : null;
+        return elasticsearchOperations.get(bookId, Book.class);
     }
 
     @Override

@@ -5,4 +5,6 @@ import com.kaankaplan.booke.modals.Reader;
 public interface ReaderRepository {
 
     Reader saveReader(Reader reader);
+
+    Reader getReaderById(String userId);
 }

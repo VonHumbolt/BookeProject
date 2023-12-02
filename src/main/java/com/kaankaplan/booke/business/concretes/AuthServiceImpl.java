@@ -14,6 +14,7 @@ import com.kaankaplan.booke.modals.RegistrableUser;
 import com.kaankaplan.booke.modals.Role;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.util.bcel.Const;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -42,6 +43,10 @@ public class AuthServiceImpl implements AuthService {
     @Transactional
     @Override
     public DataResult<RegistrableUser> registerReader(UserRegisterDto userRegisterDto) {
+        boolean isUserExist = registrableUserService.getUserByEmail(userRegisterDto.email()).isSuccess();
+        if(isUserExist) {
+            return new ErrorDataResult<>(Constant.USER_ALREADY_REGISTERED);
+        }
         Role readerRole = roleService.getRoleByName("READER").getData();
         log.info("Reader role --> " + readerRole);
         RegistrableUser registrableUser =

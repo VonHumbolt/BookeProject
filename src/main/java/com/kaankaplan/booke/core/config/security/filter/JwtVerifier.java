@@ -43,7 +43,7 @@ public class JwtVerifier extends OncePerRequestFilter {
                 List<SimpleGrantedAuthority> grantedAuthorities = authorities.stream().map(
                         authority -> new SimpleGrantedAuthority("AUTHORITY_" + authority.get("authority"))
                 ).toList();
-
+                logger.info("GrantedAuthorities ---> " + grantedAuthorities);
                 Authentication authentication = new UsernamePasswordAuthenticationToken(
                         body.getIssuer(),
                         null,

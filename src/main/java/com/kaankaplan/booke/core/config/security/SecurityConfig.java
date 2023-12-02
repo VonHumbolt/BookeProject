@@ -32,7 +32,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers(HttpMethod.POST, "/auth/**").permitAll()
                 .requestMatchers(HttpMethod.POST, "/role/**").permitAll() // GEÇİCİ !!!
-                .anyRequest().authenticated();
+                .anyRequest().hasAnyAuthority("AUTHORITY_READER", "AUTHORITY_ADMIN");
         httpSecurity.authenticationProvider(daoAuthenticationProvider());
         httpSecurity.addFilterBefore(jwtVerifier, UsernamePasswordAuthenticationFilter.class);
         return httpSecurity.build();

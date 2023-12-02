@@ -12,12 +12,9 @@ public class User {
     private String userId;
     @Field(name = "fullName", type = FieldType.Text)
     public String fullName;
-    @Field(name="isActive", type=FieldType.Boolean)
-    public boolean isActive;
 
     public User(String fullName) {
         this.fullName = fullName;
-        this.isActive = true;
     }
 
     public User() { }
