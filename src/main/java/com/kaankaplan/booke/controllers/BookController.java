@@ -2,10 +2,12 @@ package com.kaankaplan.booke.controllers;
 
 import com.kaankaplan.booke.business.abstracts.BookService;
 import com.kaankaplan.booke.core.util.results.DataResult;
+import com.kaankaplan.booke.core.util.results.Result;
 import com.kaankaplan.booke.dto.BookDto;
 import com.kaankaplan.booke.modals.Book;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -19,6 +21,11 @@ public class BookController {
     @PostMapping("addBook")
     public DataResult<Book> addBook(@RequestBody BookDto bookDto) {
         return bookService.addBook(bookDto);
+    }
+
+    @PostMapping("addImageForBook/{bookId}")
+    public Result addImageForBook(@PathVariable String bookId, @RequestPart("image") MultipartFile multipartFile) {
+        return bookService.addImageForBook(bookId, multipartFile);
     }
 
     @GetMapping("getBookById/{bookId}")

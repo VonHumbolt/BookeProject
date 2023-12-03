@@ -4,6 +4,7 @@ import com.kaankaplan.booke.modals.RegistrableUser;
 
 public final class Constant {
 
+    public static final String DEFAULT_PROFILE_PICTURE = "https://res.cloudinary.com/dspea8wm4/image/upload/v1701638455/default_profile_pic_szshsv.jpg";
     public static final String USER_DOES_NOT_EXIST_WITH_GIVEN_EMAIL="User doesn't exist with given email!";
     public static final String USER_DOES_NOT_EXIST_WITH_GIVEN_USERID = "User doesn't exist with given userId!";
     public static final String USER_SUCCESSFULLY_CREATED = "User is created successfully!";
@@ -30,4 +31,12 @@ public final class Constant {
     public static final String POST_NOT_IN_USER_POSTS = "Post is not fount in user posts!";
     public static final String POST_NOT_UPDATED = "Post is not updated!";
     public static final String ADD_NEW_GENRE = "New Genre is created!";
+    public static final String CURRENTLY_READING = "Currently Reading";
+    public static final String WANT_TO_READ = "Want to Read";
+    public static final String READ = "Read";
+    public static final String BOOK_ADDED_IN_CURRENTLY_READINGS = "Book is added in currently reading books";
+    public static final String BOOK_ADDED_IN_WANT_TO_READS = "Book is added in want to read books";
+    public static final String BOOK_ADDED_IN_READS = "Book is added in read books";
+    public static final String PROFILE_PICTURE_UPDATED = "Profile picture was updated successfully!";
+    public static final String BOOK_IMAGE_ADDED = "Book image is added successully!";
 }

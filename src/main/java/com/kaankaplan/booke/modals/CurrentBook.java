@@ -18,6 +18,8 @@ public class CurrentBook {
         this.currentPage = 0;
     }
 
+    public CurrentBook() { }
+
     public String getCurrentBookId() {
         return currentBookId;
     }

@@ -22,7 +22,7 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public DataResult<Author> addAuthor(AuthorDto authorDto) {
         log.info("Add author-->" + authorDto);
-        Author author = new Author(authorDto.fullName(), authorDto.profileImageUrl());
+        Author author = new Author(authorDto.fullName());
         return new SuccessDataResult<>(authorRepository.save(author), Constant.ADD_NEW_AUTHOR);
     }
 

@@ -2,8 +2,10 @@ package com.kaankaplan.booke.business.abstracts;
 
 import com.kaankaplan.booke.core.util.results.DataResult;
 import com.kaankaplan.booke.core.util.results.Result;
+import com.kaankaplan.booke.dto.BookStatusDto;
 import com.kaankaplan.booke.modals.Post;
 import com.kaankaplan.booke.modals.Reader;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -22,4 +24,16 @@ public interface ReaderService {
     Result addPostToReader(String userId, Post post);
 
     Result updateUserPost(Post post);
+
+    DataResult<BookStatusDto> getBookCurrentStatusForReader(String readerId, String bookId);
+
+    Result addBookIntoCurrentlyReadings(String readerId, String bookId);
+
+    Result addBookIntoWantToReads(String readerId, String bookId);
+
+    Result addBookIntoReads(String readerId, String bookId);
+
+    DataResult<List<Reader>> searchReaderAutocomplete(String fullName);
+
+    Result updateProfileImage(String userId, MultipartFile multipartFile);
 }

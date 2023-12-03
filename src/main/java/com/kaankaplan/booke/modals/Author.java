@@ -11,20 +11,14 @@ import java.util.List;
 public class Author extends User {
 
     public List<Book> books;
-    public String profileImageUrl;
 
-    public Author(String fullName, List<Book> books, String profileImageUrl) {
-        this(fullName, profileImageUrl);
-        this.books = books;
-    }
-    public Author(String fullName, String profileImageUrl) {
+    public Author(String fullName, List<Book> books) {
         this(fullName);
-        this.profileImageUrl = profileImageUrl;
+        this.books = books;
     }
     public Author(String fullName) {
         super(fullName);
         this.books = new ArrayList<>();
-        this.profileImageUrl = "DEFAULT_PROFILE_IMAGE_URL";
     }
 
     public Author() { }

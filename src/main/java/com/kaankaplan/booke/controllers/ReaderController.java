@@ -3,9 +3,11 @@ package com.kaankaplan.booke.controllers;
 import com.kaankaplan.booke.business.abstracts.ReaderService;
 import com.kaankaplan.booke.core.util.results.DataResult;
 import com.kaankaplan.booke.core.util.results.Result;
+import com.kaankaplan.booke.dto.BookStatusDto;
 import com.kaankaplan.booke.modals.Reader;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -39,5 +41,35 @@ public class ReaderController {
     @PostMapping("unfollow/{userId}/{wantToUnfollowUserId}")
     public Result unfollow(@PathVariable String userId, @PathVariable String wantToUnfollowUserId) {
         return readerService.unfollow(userId, wantToUnfollowUserId);
+    }
+
+    @GetMapping("getBookStatus/{readerId}/{bookId}")
+    public DataResult<BookStatusDto> getBookCurrentStatusForReader(@PathVariable String readerId, @PathVariable String bookId){
+        return readerService.getBookCurrentStatusForReader(readerId, bookId);
+    }
+
+    @PostMapping("addCurrentlyBook/{readerId}/{bookId}")
+    public Result addBookIntoCurrentlyReadings(@PathVariable String readerId, @PathVariable String bookId){
+        return readerService.addBookIntoCurrentlyReadings(readerId, bookId);
+    }
+
+    @PostMapping("addWantToRead/{readerId}/{bookId}")
+    Result addBookIntoWantToReads(@PathVariable String readerId, @PathVariable String bookId) {
+        return readerService.addBookIntoWantToReads(readerId, bookId);
+    }
+
+    @PostMapping("addRead/{readerId}/{bookId}")
+    Result addBookIntoReads(@PathVariable String readerId, @PathVariable String bookId) {
+        return readerService.addBookIntoReads(readerId, bookId);
+    }
+
+    @GetMapping("search/{fullName}")
+    public DataResult<List<Reader>> searchReaderAutocomplete(@PathVariable String fullName) {
+        return readerService.searchReaderAutocomplete(fullName);
+    }
+
+    @PostMapping("updateProfileImage/{userId}")
+    public Result updateProfileImage(@PathVariable String userId, @RequestPart("image") MultipartFile multipartFile) {
+        return readerService.updateProfileImage(userId, multipartFile);
     }
 }

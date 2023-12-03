@@ -24,6 +24,7 @@ public class Book {
     public List<String> genres;
     public int publishedDate;
     public String publisher;
+    public Image bookImage;
     public Rating rating;
     public List<Review> reviews;
 
@@ -46,5 +47,20 @@ public class Book {
 
     public String getBookId() {
         return bookId;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj)
+            return true;
+        if(obj == null || obj.getClass()!= this.getClass())
+            return false;
+        Book book = (Book) obj;
+        return this.bookId.equals(book.bookId);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 }

@@ -3,6 +3,7 @@ package com.kaankaplan.booke.business.concretes;
 import com.kaankaplan.booke.business.abstracts.GenreService;
 import com.kaankaplan.booke.business.messages.Constant;
 import com.kaankaplan.booke.core.util.results.DataResult;
+import com.kaankaplan.booke.core.util.results.Result;
 import com.kaankaplan.booke.core.util.results.SuccessDataResult;
 import com.kaankaplan.booke.modals.Genre;
 import com.kaankaplan.booke.repositories.abstracts.GenreRepository;
@@ -29,8 +30,6 @@ public class GenreServiceImpl implements GenreService {
         Genre genre = new Genre(genreName);
         return new SuccessDataResult<>(genreRepository.saveOrUpdate(genre), Constant.ADD_NEW_GENRE);
     }
-
-    // TODO: Add books into genre!
 
     @Cacheable(value = "genres")
     @Override
