@@ -7,5 +7,7 @@ import java.util.List;
 
 public interface GenreRepository {
 
-    List<Genre> getAllGenres();
+    Genre saveOrUpdate(Genre genre);
+
+    List<Genre> getFirstThreeGenres();
 }

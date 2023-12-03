@@ -21,7 +21,12 @@ public class GenreRepositoryImpl implements GenreRepository {
     private final ElasticsearchOperations elasticsearchOperations;
 
     @Override
-    public List<Genre> getAllGenres() {
+    public Genre saveOrUpdate(Genre genre) {
+        return elasticsearchOperations.save(genre);
+    }
+
+    @Override
+    public List<Genre> getFirstThreeGenres() {
         Query query = NativeQuery.builder()
                 .withQuery(q -> q
                         .matchAll(m -> m

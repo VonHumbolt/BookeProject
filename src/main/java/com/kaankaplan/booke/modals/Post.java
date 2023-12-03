@@ -1,5 +1,6 @@
 package com.kaankaplan.booke.modals;
 
+import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@ToString
 @Document(indexName = "post")
 public class Post {
 
@@ -26,14 +28,9 @@ public class Post {
     @Field(name="published_date", type = FieldType.Date)
     private final Date publishedDate;
 
-    {
-        this.likeCount = 0;
-        this.comments = new ArrayList<>();
-        this.publishedDate = new Date();
-    }
-
     public Post(String userId, String fullName, String profilePictureUrl, String activity,
                 String bookName, String authorName, String bookImageUrl) {
+        this();
         this.userId = userId;
         this.fullName = fullName;
         this.profilePictureUrl = profilePictureUrl;
@@ -44,6 +41,9 @@ public class Post {
     }
 
     public Post() {
+        this.likeCount = 0;
+        this.comments = new ArrayList<>();
+        this.publishedDate = new Date();
     }
 
     public String getPostId() {
@@ -52,5 +52,22 @@ public class Post {
 
     public Date getPublishedDate() {
         return publishedDate;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj)
+            return true;
+
+        if(obj == null || obj.getClass()!= this.getClass())
+            return false;
+
+        Post post = (Post) obj;
+        return this.postId.equals(post.postId);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 }

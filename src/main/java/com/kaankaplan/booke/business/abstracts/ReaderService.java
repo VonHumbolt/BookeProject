@@ -20,4 +20,6 @@ public interface ReaderService {
     Result unfollow(String userId, String wantToUnfollowUserId);
 
     Result addPostToReader(String userId, Post post);
+
+    Result updateUserPost(Post post);
 }

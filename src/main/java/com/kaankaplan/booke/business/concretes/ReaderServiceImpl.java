@@ -90,11 +90,26 @@ public class ReaderServiceImpl implements ReaderService {
         return new ErrorResult(Constant.UNFOLLOW_UNSUCCESSFUL);
     }
 
+    @Transactional
     @Override
     public Result addPostToReader(String userId, Post post) {
         Reader reader = readerRepository.getReaderById(userId);
         reader.posts.add(post);
         readerRepository.saveReader(reader);
         return new SuccessResult();
+    }
+
+    @Transactional
+    @Override
+    public Result updateUserPost(Post post) {
+        Reader reader = readerRepository.getReaderById(post.userId);
+        if(reader.posts.contains(post)) {
+            log.info("Post in user posts");
+            reader.posts.remove(post);
+            reader.posts.add(post);
+            readerRepository.saveReader(reader);
+            return new SuccessResult();
+        }
+        return new ErrorResult(Constant.POST_NOT_IN_USER_POSTS);
     }
 }

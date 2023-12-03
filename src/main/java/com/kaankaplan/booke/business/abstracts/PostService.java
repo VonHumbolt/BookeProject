@@ -13,7 +13,7 @@ public interface PostService {
 
     DataResult<List<Post>> getUserFollowsPost(String userId);
 
-    Result likePost(String userId, String postId);
+    Result likePost(String postId);
 
     Result unlikePost(String userId, String postId);
 }

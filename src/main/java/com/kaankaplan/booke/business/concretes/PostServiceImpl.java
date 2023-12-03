@@ -30,7 +30,9 @@ public class PostServiceImpl implements PostService {
     public DataResult<Post> saveOrUpdate(PostDto postDto) {
         Post post = new Post(postDto.userId(), postDto.fullName(), postDto.profilePictureUrl(),
                 postDto.activity(), postDto.bookName(), postDto.authorName(), postDto.bookImageUrl());
+        log.info("Post ---> " + post);
         Post savedPost = postRepository.saveOrUpdate(post);
+        log.info("Saved Post ---> " + savedPost);
         readerService.addPostToReader(postDto.userId(), savedPost);
         return new SuccessDataResult<>(savedPost, Constant.POST_CREATED);
     }
@@ -46,23 +48,25 @@ public class PostServiceImpl implements PostService {
         for(Reader reader : readerFollows) {
             timelinePosts.addAll(reader.posts);
         }
-
+        for(Post post : timelinePosts) {
+            System.out.println("Date -> " + post.getPublishedDate());
+        }
         // TODO: Zamana göre sıralama Comparator ile !
-        timelinePosts.sort(Comparator.comparing(Post::getPublishedDate));
+//        timelinePosts.sort(Comparator.comparing(Post::getPublishedDate));
         return new SuccessDataResult<>(timelinePosts);
     }
 
-// TODO: likePost dene
     @Transactional
     @Override
-    public Result likePost(String userId, String postId) {
+    public Result likePost(String postId) {
         Post post = postRepository.getPostById(postId);
         if (post == null)
             return new ErrorResult(Constant.POST_NOT_FOUND);
 
         post.likeCount += 1;
-        postRepository.saveOrUpdate(post);
-        return new SuccessResult(Constant.LIKE_POST);
+        Post updatedPost = postRepository.saveOrUpdate(post);
+        boolean isSuccess = readerService.updateUserPost(updatedPost).isSuccess();
+        return isSuccess ? new SuccessResult(Constant.LIKE_POST) : new ErrorResult(Constant.POST_NOT_UPDATED);
     }
 
     @Transactional
@@ -71,11 +75,10 @@ public class PostServiceImpl implements PostService {
         Post post = postRepository.getPostById(postId);
         if (post == null)
             return new ErrorResult(Constant.POST_NOT_FOUND);
-        // TODO: kullanıcının post'larına da ekleyeyim mi? Kullanıcıların içinde sadece postId mi yoksa post'un kendisi mi
-        // tutulsun?
         // TODO: Kullanıcı karşısına çıkan post'u daha önce beğenip beğenmediğini nasıl görecek?
         post.likeCount -= 1;
-        postRepository.saveOrUpdate(post);
-        return new SuccessResult(Constant.UNLIKE_POST);
+        Post updatedPost = postRepository.saveOrUpdate(post);
+        boolean isSuccess = readerService.updateUserPost(updatedPost).isSuccess();
+        return isSuccess ? new SuccessResult(Constant.UNLIKE_POST) : new ErrorResult(Constant.POST_NOT_UPDATED);
     }
 }

@@ -27,4 +27,7 @@ public final class Constant {
     public static final String AUTHOR_NOT_FOUND = "Author is not found!";
     public static final String ADD_NEW_BOOK = "New book is added!";
     public static final String USER_ALREADY_REGISTERED = "User is already registered with given email!";
+    public static final String POST_NOT_IN_USER_POSTS = "Post is not fount in user posts!";
+    public static final String POST_NOT_UPDATED = "Post is not updated!";
+    public static final String ADD_NEW_GENRE = "New Genre is created!";
 }

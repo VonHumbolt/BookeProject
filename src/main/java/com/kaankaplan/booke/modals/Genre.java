@@ -3,11 +3,12 @@ package com.kaankaplan.booke.modals;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Document(indexName = "genre")
-public class Genre {
+public class Genre implements Serializable {
 
     @Id
     private String genreId;
@@ -23,6 +24,8 @@ public class Genre {
         this(genreName);
         this.books = books;
     }
+
+    public Genre() { }
 
     public String getGenreId() {
         return genreId;
