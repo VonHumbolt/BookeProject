@@ -34,3 +34,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### React Native ###
+src/main/booke-mobile-app/node_modules/
