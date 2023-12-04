@@ -2,15 +2,13 @@ package com.kaankaplan.booke.business.concretes;
 
 import com.kaankaplan.booke.business.abstracts.BookService;
 import com.kaankaplan.booke.business.abstracts.ReaderService;
+import com.kaankaplan.booke.business.abstracts.ReadingChallengeService;
 import com.kaankaplan.booke.business.messages.Constant;
 import com.kaankaplan.booke.core.services.image.abstracts.ImageUploadService;
 import com.kaankaplan.booke.core.util.results.*;
 import com.kaankaplan.booke.dto.BookStatusDto;
 import com.kaankaplan.booke.dto.PostDto;
-import com.kaankaplan.booke.modals.Book;
-import com.kaankaplan.booke.modals.Image;
-import com.kaankaplan.booke.modals.Post;
-import com.kaankaplan.booke.modals.Reader;
+import com.kaankaplan.booke.modals.*;
 import com.kaankaplan.booke.repositories.abstracts.ReaderRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +28,7 @@ public class ReaderServiceImpl implements ReaderService {
     private final ReaderRepository readerRepository;
     private final BookService bookService;
     private final ImageUploadService imageUploadService;
+    private final ReadingChallengeService readingChallengeService;
 
     @Transactional
     @Override
@@ -103,25 +102,11 @@ public class ReaderServiceImpl implements ReaderService {
 
     @Transactional
     @Override
-    public Result addPostToReader(String userId, Post post) {
+    public Result addPostToReader(String userId, String postId) {
         Reader reader = readerRepository.getReaderById(userId);
-        reader.posts.add(post);
+        reader.postIdList.add(postId);
         readerRepository.saveReader(reader);
         return new SuccessResult();
-    }
-
-    @Transactional
-    @Override
-    public Result updateUserPost(Post post) {
-        Reader reader = readerRepository.getReaderById(post.userId);
-        if(reader.posts.contains(post)) {
-            log.info("Post in user posts");
-            reader.posts.remove(post);
-            reader.posts.add(post);
-            readerRepository.saveReader(reader);
-            return new SuccessResult();
-        }
-        return new ErrorResult(Constant.POST_NOT_IN_USER_POSTS);
     }
 
     @Override
@@ -230,5 +215,34 @@ public class ReaderServiceImpl implements ReaderService {
         reader.profileImage = new Image(imageId, imageUrl);
         readerRepository.saveReader(reader);
         return new SuccessResult(Constant.PROFILE_PICTURE_UPDATED);
+    }
+
+    @Transactional
+    @Override
+    public Result startReadingChallenge(String userId, int target) {
+        Reader reader = readerRepository.getReaderById(userId);
+        if(reader == null)
+            return new ErrorResult(Constant.READER_WAS_NOT_FOUND);
+
+        ReadingChallenge readingChallenge = readingChallengeService.createReadingChallenge(target).getData();
+        reader.readingChallenges.add(readingChallenge);
+        readerRepository.saveReader(reader);
+        return new SuccessResult(Constant.READING_CHALLENGE_START);
+    }
+
+    @Override
+    public Result updateReadingChallenge(String userId, String challengeId, String bookId) {
+        Reader reader = readerRepository.getReaderById(userId);
+        if(reader == null)
+            return new ErrorResult(Constant.READER_WAS_NOT_FOUND);
+
+        log.info("Reader old challenges ---> " + reader.readingChallenges);
+        ReadingChallenge challenge = readingChallengeService.updateReadingChallenge(challengeId, bookId).getData();
+        log.info("Currently active challenge ---> " + challenge);
+        reader.readingChallenges.remove(challenge);
+        reader.readingChallenges.add(challenge);
+        log.info("Reader new challenges ---> " + reader.readingChallenges);
+        readerRepository.saveReader(reader);
+        return challenge.isActive ? new SuccessResult(Constant.READING_CHALLENGE_UPDATE) : new SuccessResult(Constant.READING_CHALLENGE_COMPLETED);
     }
 }

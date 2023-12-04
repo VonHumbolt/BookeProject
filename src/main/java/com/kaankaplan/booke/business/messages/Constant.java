@@ -1,5 +1,6 @@
 package com.kaankaplan.booke.business.messages;
 
+import com.kaankaplan.booke.modals.ReadingChallenge;
 import com.kaankaplan.booke.modals.RegistrableUser;
 
 public final class Constant {
@@ -39,4 +40,8 @@ public final class Constant {
     public static final String BOOK_ADDED_IN_READS = "Book is added in read books";
     public static final String PROFILE_PICTURE_UPDATED = "Profile picture was updated successfully!";
     public static final String BOOK_IMAGE_ADDED = "Book image is added successully!";
+    public static final String READING_CHALLENGE_START = "Reading challenge is created!";
+    public static final String READING_CHALLENGE_NOT_FOUND = "Reading challenge was not found!";
+    public static final String READING_CHALLENGE_COMPLETED = "Reading challenge was completed!";
+    public static final String READING_CHALLENGE_UPDATE = "Reading challenge is updated successfully!";
 }

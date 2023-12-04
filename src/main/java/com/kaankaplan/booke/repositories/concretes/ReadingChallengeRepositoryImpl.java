@@ -14,7 +14,17 @@ public class ReadingChallengeRepositoryImpl implements ReadingChallengeRepositor
     private final ElasticsearchOperations elasticsearchOperations;
 
     @Override
+    public ReadingChallenge getReadingChallengeById(String challengeId) {
+        return elasticsearchOperations.get(challengeId, ReadingChallenge.class);
+    }
+
+    @Override
     public ReadingChallenge startChallenge(ReadingChallenge readingChallenge) {
+        return elasticsearchOperations.save(readingChallenge);
+    }
+
+    @Override
+    public ReadingChallenge updateChallenge(ReadingChallenge readingChallenge) {
         return elasticsearchOperations.save(readingChallenge);
     }
 }

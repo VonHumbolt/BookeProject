@@ -21,9 +21,7 @@ public interface ReaderService {
 
     Result unfollow(String userId, String wantToUnfollowUserId);
 
-    Result addPostToReader(String userId, Post post);
-
-    Result updateUserPost(Post post);
+    Result addPostToReader(String userId, String postId);
 
     DataResult<BookStatusDto> getBookCurrentStatusForReader(String readerId, String bookId);
 
@@ -36,4 +34,8 @@ public interface ReaderService {
     DataResult<List<Reader>> searchReaderAutocomplete(String fullName);
 
     Result updateProfileImage(String userId, MultipartFile multipartFile);
+
+    Result startReadingChallenge(String userId, int target);
+
+    Result updateReadingChallenge(String userId, String challengeId, String bookId);
 }

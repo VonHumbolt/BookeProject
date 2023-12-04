@@ -26,9 +26,9 @@ public class PostController {
         return postService.saveOrUpdate(postDto);
     }
 
-    @PostMapping("likePost/{postId}")
-    public Result likePost(@PathVariable String postId) {
-        return postService.likePost(postId);
+    @PostMapping("likePost/{userId}/{postId}")
+    public Result likePost(@PathVariable String userId, @PathVariable String postId) {
+        return postService.likePost(userId, postId);
     }
 
     @PostMapping("unlikePost/{userId}/{postId}")

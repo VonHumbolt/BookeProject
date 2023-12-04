@@ -33,7 +33,7 @@ public class PostServiceImpl implements PostService {
         log.info("Post ---> " + post);
         Post savedPost = postRepository.saveOrUpdate(post);
         log.info("Saved Post ---> " + savedPost);
-        readerService.addPostToReader(postDto.userId(), savedPost);
+        readerService.addPostToReader(postDto.userId(), savedPost.getPostId());
         return new SuccessDataResult<>(savedPost, Constant.POST_CREATED);
     }
 
@@ -46,27 +46,37 @@ public class PostServiceImpl implements PostService {
         List<Post> timelinePosts = new ArrayList<>();
         List<Reader> readerFollows = result.getData();
         for(Reader reader : readerFollows) {
-            timelinePosts.addAll(reader.posts);
+            timelinePosts.addAll(getReaderPostDetail(reader));
         }
-        for(Post post : timelinePosts) {
-            System.out.println("Date -> " + post.getPublishedDate());
-        }
-        // TODO: Zamana göre sıralama Comparator ile !
-//        timelinePosts.sort(Comparator.comparing(Post::getPublishedDate));
+        log.info("timelinePosts ---> " + timelinePosts);
+        // TODO: Post'ların zamanı hep şu ana denk geliyor! Zamana göre sıralama Comparator ile !
+        // TODO: Kullanıcının takip ettikleri yeni bir post eklediğinde güncellenmediğinden o post gelmiyor!!!
+        timelinePosts.sort(Comparator.comparing(Post::getPublishedDate));
+        log.info("timelinePosts with sorted ---> " + timelinePosts);
         return new SuccessDataResult<>(timelinePosts);
+    }
+
+    private List<Post> getReaderPostDetail(Reader reader) {
+        List<Post> posts = new ArrayList<>();
+        for(String postId : reader.postIdList) {
+            Post post = postRepository.getPostById(postId);
+            posts.add(post);
+        }
+        posts.sort(Comparator.comparing(Post::getPublishedDate));
+        return posts.size() > 5 ? posts.subList(0, 5) : posts;
     }
 
     @Transactional
     @Override
-    public Result likePost(String postId) {
+    public Result likePost(String userId, String postId) {
         Post post = postRepository.getPostById(postId);
         if (post == null)
             return new ErrorResult(Constant.POST_NOT_FOUND);
 
         post.likeCount += 1;
-        Post updatedPost = postRepository.saveOrUpdate(post);
-        boolean isSuccess = readerService.updateUserPost(updatedPost).isSuccess();
-        return isSuccess ? new SuccessResult(Constant.LIKE_POST) : new ErrorResult(Constant.POST_NOT_UPDATED);
+        post.usersWhoLikePost.add(userId);
+        postRepository.saveOrUpdate(post);
+        return new SuccessResult(Constant.LIKE_POST);
     }
 
     @Transactional
@@ -77,8 +87,8 @@ public class PostServiceImpl implements PostService {
             return new ErrorResult(Constant.POST_NOT_FOUND);
         // TODO: Kullanıcı karşısına çıkan post'u daha önce beğenip beğenmediğini nasıl görecek?
         post.likeCount -= 1;
-        Post updatedPost = postRepository.saveOrUpdate(post);
-        boolean isSuccess = readerService.updateUserPost(updatedPost).isSuccess();
-        return isSuccess ? new SuccessResult(Constant.UNLIKE_POST) : new ErrorResult(Constant.POST_NOT_UPDATED);
+        post.usersWhoLikePost.remove(userId);
+        postRepository.saveOrUpdate(post);
+        return new SuccessResult(Constant.UNLIKE_POST);
     }
 }

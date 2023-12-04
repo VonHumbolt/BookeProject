@@ -24,6 +24,7 @@ public class Post {
     public String authorName;
     public String bookImageUrl;
     public int likeCount;
+    public List<String> usersWhoLikePost;
     public List<Comment> comments;
     @Field(name="published_date", type = FieldType.Date)
     private final Date publishedDate;
@@ -42,6 +43,7 @@ public class Post {
 
     public Post() {
         this.likeCount = 0;
+        this.usersWhoLikePost = new ArrayList<>();
         this.comments = new ArrayList<>();
         this.publishedDate = new Date();
     }
