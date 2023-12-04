@@ -12,16 +12,12 @@ import java.util.List;
 public class Reader extends RegistrableUser {
 
     public Image profileImage;
-//    public List<ReadBook> readBooks;
-//    public List<CurrentBook> currentlyBooks;
-//    public List<WantToReadBook> wantToReadBooks;
     public List<ReadingChallenge> readingChallenges;
-
     public List<Book> readBooks;
     public List<Book> currentlyBooks;
     public List<Book> wantToReadBooks;
-    public List<Reader> follows;
-    public List<Reader> followers;
+    public List<String> followsIdList;
+    public List<String> followersIdList;
     public List<String> postIdList;
 
     public Reader(String fullName, String email, String password, Role role) {
@@ -31,8 +27,8 @@ public class Reader extends RegistrableUser {
         this.currentlyBooks = new ArrayList<>();
         this.wantToReadBooks = new ArrayList<>();
         this.readingChallenges = new ArrayList<>();
-        this.follows = new ArrayList<>();
-        this.followers = new ArrayList<>();
+        this.followsIdList = new ArrayList<>();
+        this.followersIdList = new ArrayList<>();
         this.postIdList = new ArrayList<>();
     }
 

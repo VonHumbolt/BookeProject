@@ -27,7 +27,7 @@ public class Post {
     public List<String> usersWhoLikePost;
     public List<Comment> comments;
     @Field(name="published_date", type = FieldType.Date)
-    private final Date publishedDate;
+    public Date publishedDate;
 
     public Post(String userId, String fullName, String profilePictureUrl, String activity,
                 String bookName, String authorName, String bookImageUrl) {

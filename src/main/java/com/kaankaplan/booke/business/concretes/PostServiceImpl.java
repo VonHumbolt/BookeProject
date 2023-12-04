@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -49,9 +50,8 @@ public class PostServiceImpl implements PostService {
             timelinePosts.addAll(getReaderPostDetail(reader));
         }
         log.info("timelinePosts ---> " + timelinePosts);
-        // TODO: Post'ların zamanı hep şu ana denk geliyor! Zamana göre sıralama Comparator ile !
-        // TODO: Kullanıcının takip ettikleri yeni bir post eklediğinde güncellenmediğinden o post gelmiyor!!!
         timelinePosts.sort(Comparator.comparing(Post::getPublishedDate));
+        Collections.reverse(timelinePosts);
         log.info("timelinePosts with sorted ---> " + timelinePosts);
         return new SuccessDataResult<>(timelinePosts);
     }
@@ -60,9 +60,11 @@ public class PostServiceImpl implements PostService {
         List<Post> posts = new ArrayList<>();
         for(String postId : reader.postIdList) {
             Post post = postRepository.getPostById(postId);
+            log.info("Post Date ---> " + post.publishedDate);
             posts.add(post);
         }
         posts.sort(Comparator.comparing(Post::getPublishedDate));
+        Collections.reverse(posts);
         return posts.size() > 5 ? posts.subList(0, 5) : posts;
     }
 

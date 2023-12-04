@@ -7,16 +7,15 @@ import com.kaankaplan.booke.business.messages.Constant;
 import com.kaankaplan.booke.core.services.image.abstracts.ImageUploadService;
 import com.kaankaplan.booke.core.util.results.*;
 import com.kaankaplan.booke.dto.BookStatusDto;
-import com.kaankaplan.booke.dto.PostDto;
 import com.kaankaplan.booke.modals.*;
 import com.kaankaplan.booke.repositories.abstracts.ReaderRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.tomcat.util.bcel.Const;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -47,8 +46,11 @@ public class ReaderServiceImpl implements ReaderService {
         Reader reader = readerRepository.getReaderById(userId);
         if (reader == null)
             return new ErrorDataResult<>(Constant.READER_WAS_NOT_FOUND);
-
-        return new SuccessDataResult<>(reader.follows);
+        List<Reader> follows = new ArrayList<>();
+        for (String readerId : reader.followsIdList) {
+            follows.add(readerRepository.getReaderById(readerId));
+        }
+        return new SuccessDataResult<>(follows);
     }
 
     @Override
@@ -56,22 +58,24 @@ public class ReaderServiceImpl implements ReaderService {
         Reader reader = readerRepository.getReaderById(userId);
         if (reader == null)
             return new ErrorDataResult<>(Constant.READER_WAS_NOT_FOUND);
-
-        return new SuccessDataResult<>(reader.followers);
+        List<Reader> followers = new ArrayList<>();
+        for (String readerId : reader.followersIdList) {
+            followers.add(readerRepository.getReaderById(readerId));
+        }
+        return new SuccessDataResult<>(followers);
     }
 
     @Transactional
     @Override
     public Result follow(String userId, String wantToFollowUserId) {
         Reader reader = readerRepository.getReaderById(userId);
-        Reader wantToFollowUser = readerRepository.getReaderById(wantToFollowUserId);
 
-        if (reader == null || wantToFollowUser == null)
+        if (reader == null)
             return new ErrorResult(Constant.READER_WAS_NOT_FOUND);
 
-        if (!reader.follows.contains(wantToFollowUser)) {
+        if (!reader.followsIdList.contains(wantToFollowUserId)) {
             log.info("User is not in the follows");
-            reader.follows.add(wantToFollowUser);
+            reader.followsIdList.add(wantToFollowUserId);
             readerRepository.saveReader(reader);
             return new SuccessResult(Constant.FOLLOW_READER);
         }
@@ -84,14 +88,13 @@ public class ReaderServiceImpl implements ReaderService {
     @Override
     public Result unfollow(String userId, String wantToUnfollowUserId) {
         Reader reader = readerRepository.getReaderById(userId);
-        Reader wantToUnfollowUser = readerRepository.getReaderById(wantToUnfollowUserId);
 
-        if (reader == null || wantToUnfollowUser == null)
+        if (reader == null)
             return new ErrorResult(Constant.READER_WAS_NOT_FOUND);
 
-        if (reader.follows.contains(wantToUnfollowUser)) {
+        if (reader.followsIdList.contains(wantToUnfollowUserId)) {
             log.info("User is in the follows");
-            reader.follows.remove(wantToUnfollowUser);
+            reader.followsIdList.remove(wantToUnfollowUserId);
             readerRepository.saveReader(reader);
             return new SuccessResult(Constant.UNFOLLOW_READER);
         }

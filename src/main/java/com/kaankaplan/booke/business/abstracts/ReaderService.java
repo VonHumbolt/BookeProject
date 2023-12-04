@@ -3,7 +3,6 @@ package com.kaankaplan.booke.business.abstracts;
 import com.kaankaplan.booke.core.util.results.DataResult;
 import com.kaankaplan.booke.core.util.results.Result;
 import com.kaankaplan.booke.dto.BookStatusDto;
-import com.kaankaplan.booke.modals.Post;
 import com.kaankaplan.booke.modals.Reader;
 import org.springframework.web.multipart.MultipartFile;
 
