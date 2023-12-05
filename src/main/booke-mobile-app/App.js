@@ -1,10 +1,10 @@
-import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import HomeScreen from "./screens/HomeScreen";
 import EntryScreen from "./screens/EntryScreen";
+import BookDetailScreen from "./screens/BookDetailScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -39,6 +39,13 @@ export default function App() {
           }}
           name="Home"
           component={HomeScreen}
+        />
+        <Stack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name="BookDetail"
+          component={BookDetailScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

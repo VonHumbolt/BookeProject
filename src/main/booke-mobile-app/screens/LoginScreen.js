@@ -5,7 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
+import React from "react";
 import { StatusBar } from "expo-status-bar";
 import AuthService from "../services/AuthService";
 import { useNavigation } from "@react-navigation/native";
@@ -32,14 +32,14 @@ const LoginScreen = () => {
         })
         .catch((error) => console.log(error));
   };
+  
   const setUserCredentials = (data) => {
     SecureStore.setItemAsync("token", data.token)
     SecureStore.setItemAsync("userId", data.userId)
     SecureStore.setItemAsync("email", data.email)
+    SecureStore.setItemAsync("refreshToken", data.refreshToken)
   }
-  // const getToken = () => {
-  //   return SecureStore.getItemAsync("jwt_token")
-  // }
+
   return (
     <SafeAreaView className="flex-1 bg-[#E07A5F]">
       <View className="p-20 mt-10">
