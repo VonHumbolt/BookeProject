@@ -6,4 +6,8 @@ export default class AuthService {
     login(credentials) {
         return axios.post(this.apiUrl + "login", credentials);
     }
+
+    register(credentials) {
+        return axios.post(this.apiUrl + "register", credentials);
+    }
 }
