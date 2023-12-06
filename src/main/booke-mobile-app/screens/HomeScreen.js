@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import BookService from "../services/BookService";
 import SearchedBook from "../components/SearchedBook";
-
+import { MagnifyingGlassIcon } from "react-native-heroicons/outline";
 const HomeScreen = () => {
   const bookService = new BookService();
   const [title, setTitle] = useState("");
@@ -21,9 +21,13 @@ const HomeScreen = () => {
 
   return (
     <SafeAreaView className="bg-[#E07A5F]">
-      <View className="p-10">
+      <View className="p-10 relative">
+        <View className="absolute top-12 pl-12 z-10">
+          <MagnifyingGlassIcon size={20} className="text-gray-50"/>
+        </View>
+        
         <TextInput
-          className="rounded-xl p-2 w-full bg-white shadow-xl"
+          className="rounded-xl p-2 px-8 w-full bg-white shadow-xl"
           placeholder="Search Book"
           onChangeText={(text) => setTitle(text)}
           value={title}
