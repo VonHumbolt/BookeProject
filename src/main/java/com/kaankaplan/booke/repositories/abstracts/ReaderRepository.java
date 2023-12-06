@@ -10,5 +10,7 @@ public interface ReaderRepository {
 
     Reader getReaderById(String userId);
 
+    Reader getReaderByEmail(String email);
+
     List<Reader> searchUserAutocomplete(String fullName);
 }

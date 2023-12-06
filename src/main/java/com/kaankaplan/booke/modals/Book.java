@@ -7,7 +7,6 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 import org.springframework.data.elasticsearch.annotations.Setting;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Document(indexName = "book")
@@ -40,6 +39,7 @@ public class Book {
         this.author = author;
         this.genres = genres;
         this.publishedDate = publishedDate;
+        this.rating = new Rating();
         this.publisher = publisher;
     }
 

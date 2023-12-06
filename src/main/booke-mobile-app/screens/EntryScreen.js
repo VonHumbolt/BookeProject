@@ -10,7 +10,7 @@ const EntryScreen = () => {
     setTimeout(() => {
       SecureStore.getItemAsync("token").then(token => {
         if(token != null)
-          navigation.navigate("Home")
+          navigation.navigate("TabNavigation")
         else 
           navigation.navigate("Login")
       })

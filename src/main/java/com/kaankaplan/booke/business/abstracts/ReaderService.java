@@ -13,6 +13,7 @@ public interface ReaderService {
     DataResult<Reader> saveReader(Reader reader);
 
     DataResult<Reader> getReaderById(String userId);
+    DataResult<Reader> getReaderByEmail(String email);
     DataResult<List<Reader>> getReadersFollows(String userId);
     DataResult<List<Reader>> getReadersFollowers(String userId);
 

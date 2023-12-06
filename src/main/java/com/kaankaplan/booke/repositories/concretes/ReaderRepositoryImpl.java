@@ -11,6 +11,8 @@ import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 
 import org.springframework.data.elasticsearch.core.SearchHit;
 import org.springframework.data.elasticsearch.core.SearchHits;
+import org.springframework.data.elasticsearch.core.query.Criteria;
+import org.springframework.data.elasticsearch.core.query.CriteriaQuery;
 import org.springframework.data.elasticsearch.core.query.Query;
 import org.springframework.stereotype.Repository;
 
@@ -30,6 +32,15 @@ public class ReaderRepositoryImpl implements ReaderRepository {
     @Override
     public Reader getReaderById(String userId) {
         return elasticsearchOperations.get(userId, Reader.class);
+    }
+
+    @Override
+    public Reader getReaderByEmail(String email) {
+        Criteria criteria = new Criteria("email").is(email);
+        Query query = new CriteriaQuery(criteria);
+        SearchHits<Reader> search = elasticsearchOperations.search(query, Reader.class);
+        List<Reader> readers = search.get().map(SearchHit::getContent).toList();
+        return readers.size() > 0 ? readers.get(0) : null;
     }
 
     @Override

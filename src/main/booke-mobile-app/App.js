@@ -5,6 +5,8 @@ import RegisterScreen from "./screens/RegisterScreen";
 import HomeScreen from "./screens/HomeScreen";
 import EntryScreen from "./screens/EntryScreen";
 import BookDetailScreen from "./screens/BookDetailScreen";
+import ReviewModal from "./components/ReviewModal";
+import TabNavigationMainScreen from "./screens/TabNavigationMainScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -18,6 +20,13 @@ export default function App() {
           }}
           name="Entry"
           component={EntryScreen}
+        />
+        <Stack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name="TabNavigation"
+          component={TabNavigationMainScreen}
         />
         <Stack.Screen
           options={{
@@ -47,7 +56,16 @@ export default function App() {
           name="BookDetail"
           component={BookDetailScreen}
         />
+        <Stack.Screen
+          options={{
+            headerShown: false,
+            presentation: "modal"
+          }}
+          name="Review"
+          component={ReviewModal}
+        />
       </Stack.Navigator>
+     
     </NavigationContainer>
   );
 }

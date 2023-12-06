@@ -5,6 +5,7 @@ import com.kaankaplan.booke.core.util.results.DataResult;
 import com.kaankaplan.booke.core.util.results.Result;
 import com.kaankaplan.booke.dto.BookDto;
 import com.kaankaplan.booke.modals.Book;
+import com.kaankaplan.booke.modals.Review;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,6 +22,11 @@ public class BookController {
     @PostMapping("addBook")
     public DataResult<Book> addBook(@RequestBody BookDto bookDto) {
         return bookService.addBook(bookDto);
+    }
+
+    @PostMapping("addReviewToBook/{bookId}")
+    public DataResult<Book> addReviewToBook(@PathVariable String bookId, @RequestBody Review review) {
+        return bookService.addReviewToBook(bookId, review);
     }
 
     @PostMapping("addImageForBook/{bookId}")

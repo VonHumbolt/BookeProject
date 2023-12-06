@@ -42,6 +42,11 @@ public class ReaderServiceImpl implements ReaderService {
     }
 
     @Override
+    public DataResult<Reader> getReaderByEmail(String email) {
+        return new SuccessDataResult<>(readerRepository.getReaderByEmail(email));
+    }
+
+    @Override
     public DataResult<List<Reader>> getReadersFollows(String userId) {
         Reader reader = readerRepository.getReaderById(userId);
         if (reader == null)

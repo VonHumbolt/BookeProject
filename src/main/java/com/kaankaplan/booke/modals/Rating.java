@@ -1,8 +1,10 @@
 package com.kaankaplan.booke.modals;
 
+import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+@ToString
 @Document(indexName = "rating")
 public class Rating {
 
@@ -13,7 +15,7 @@ public class Rating {
     public int threeStarCount;
     public int fourStarCount;
     public int fiveStarCount;
-    public int totalStartCount;
+    public int totalStarCount;
 
     public Rating() {
         this.oneStarCount = 0;
@@ -21,7 +23,7 @@ public class Rating {
         this.threeStarCount = 0;
         this.fourStarCount = 0;
         this.fiveStarCount = 0;
-        this.totalStartCount = 0;
+        this.totalStarCount = 0;
     }
 
     public String getRatingId() {

@@ -33,13 +33,13 @@ public final class Constant {
     public static final String POST_NOT_UPDATED = "Post is not updated!";
     public static final String ADD_NEW_GENRE = "New Genre is created!";
     public static final String CURRENTLY_READING = "Currently Reading";
-    public static final String WANT_TO_READ = "Want to Read";
+    public static final String WANT_TO_READ = "Want To Read";
     public static final String READ = "Read";
     public static final String BOOK_ADDED_IN_CURRENTLY_READINGS = "Book is added in currently reading books";
     public static final String BOOK_ADDED_IN_WANT_TO_READS = "Book is added in want to read books";
     public static final String BOOK_ADDED_IN_READS = "Book is added in read books";
     public static final String PROFILE_PICTURE_UPDATED = "Profile picture was updated successfully!";
-    public static final String BOOK_IMAGE_ADDED = "Book image is added successully!";
+    public static final String BOOK_IMAGE_ADDED = "Book image is added successfully!";
     public static final String READING_CHALLENGE_START = "Reading challenge is created!";
     public static final String READING_CHALLENGE_NOT_FOUND = "Reading challenge was not found!";
     public static final String READING_CHALLENGE_COMPLETED = "Reading challenge was completed!";
