@@ -23,6 +23,11 @@ public class ReaderController {
         return readerService.getReaderById(userId);
     }
 
+    @GetMapping("getReaderByEmail/{email}")
+    public DataResult<Reader> getReaderByEmail(@PathVariable String email) {
+        return readerService.getReaderByEmail(email);
+    }
+
     @GetMapping("getReaderFollows/{userId}")
     public DataResult<List<Reader>> getReaderFollows(@PathVariable String userId){
         return readerService.getReadersFollows(userId);

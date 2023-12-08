@@ -19,6 +19,7 @@ const EntryScreen = () => {
     // SecureStore.deleteItemAsync("refreshToken");
     // SecureStore.deleteItemAsync("email");
     // SecureStore.deleteItemAsync("userId");
+    // SecureStore.deleteItemAsync("readerId");
   }, [])
   
   return (

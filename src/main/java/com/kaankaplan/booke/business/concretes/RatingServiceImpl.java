@@ -25,8 +25,15 @@ public class RatingServiceImpl implements RatingService {
             case 5 -> rating.fiveStarCount += 1;
         }
         rating.totalStarCount += 1;
+        rating.meanOfRating = calculateMeanOfRating(rating);
         log.info("Rating service --> new rating: " + rating);
         return new SuccessDataResult<>(rating);
+    }
+
+    private double calculateMeanOfRating(Rating rating) {
+        double totalPoint = rating.oneStarCount + rating.twoStarCount * 2 + rating.threeStarCount * 3
+                + rating.fourStarCount * 4 + rating.fiveStarCount * 5;
+        return totalPoint / rating.totalStarCount;
     }
 
 }

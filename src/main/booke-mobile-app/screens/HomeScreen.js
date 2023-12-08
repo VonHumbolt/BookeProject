@@ -1,14 +1,25 @@
 import { View, Text, SafeAreaView, TextInput } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import BookService from "../services/BookService";
 import SearchedBook from "../components/SearchedBook";
 import { MagnifyingGlassIcon } from "react-native-heroicons/outline";
+import ReaderService from "../services/ReaderService";
+import * as SecureStore from 'expo-secure-store';
 
 const HomeScreen = () => {
+  const readerService = new ReaderService();
   const bookService = new BookService();
   const [title, setTitle] = useState("");
   const [books, setBooks] = useState([]);
+  
+  useEffect(() => {
+    SecureStore.getItemAsync("email").then(email => {
+      readerService.getReaderByEmail(email).then(res => {
+        SecureStore.setItemAsync("readerId", res.data.data.userId)
+      })
+    })
+  }, [])
 
   const searchBook = () => {
     if (title.trim().length > 0)

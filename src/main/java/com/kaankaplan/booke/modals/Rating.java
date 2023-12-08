@@ -16,6 +16,7 @@ public class Rating {
     public int fourStarCount;
     public int fiveStarCount;
     public int totalStarCount;
+    public double meanOfRating;
 
     public Rating() {
         this.oneStarCount = 0;
@@ -24,6 +25,7 @@ public class Rating {
         this.fourStarCount = 0;
         this.fiveStarCount = 0;
         this.totalStarCount = 0;
+        this.meanOfRating = 0;
     }
 
     public String getRatingId() {

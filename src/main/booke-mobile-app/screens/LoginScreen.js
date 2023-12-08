@@ -35,9 +35,9 @@ const LoginScreen = () => {
   
   const setUserCredentials = (data) => {
     SecureStore.setItemAsync("token", data.token)
+    SecureStore.setItemAsync("refreshToken", data.refreshToken)
     SecureStore.setItemAsync("userId", data.userId)
     SecureStore.setItemAsync("email", data.email)
-    SecureStore.setItemAsync("refreshToken", data.refreshToken)
   }
 
   return (

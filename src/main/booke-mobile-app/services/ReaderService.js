@@ -8,6 +8,10 @@ export default class ReaderService {
         this.axiosInstance = new Interceptor().getInstance();
     }
 
+    getReaderByEmail(email) {
+        return this.axiosInstance.get(this.apiUrl + "getReaderByEmail/" + email);
+    }
+
     getBookStatusForUser(userId, bookId) {
         return this.axiosInstance.get(this.apiUrl + "getBookStatus/" + userId + "/" + bookId);
     }

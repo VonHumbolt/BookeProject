@@ -1,69 +1,96 @@
 import { View, Text, ImageBackground, Image, ScrollView } from "react-native";
-import React from "react";
-import { StarIcon } from "react-native-heroicons/solid";
+import React, { useState } from "react";
+import { BookOpenIcon, StarIcon } from "react-native-heroicons/solid";
 import SelectDropdown from "react-native-select-dropdown";
 import { CheckIcon } from "react-native-heroicons/outline";
+import ReaderService from "../services/ReaderService";
 
-const CurrentlyReading = ({ readingList }) => {
-  const options = ["Want To Read", "Currently Reading", "Read"];
+const CurrentlyReading = ({ books, reader, navigation }) => {
+  const readerService = new ReaderService();
+  const options = ["Want To Read", "Read"];
+
+  const changeBookStatusForReader = (item, book) => {
+    if (item == "Want To Read") {
+      readerService
+        .addBookIntoWantToReads(reader.userId, book.bookId)
+        .then((res) => {
+           
+        });
+    }
+
+    if (item == "Read") {
+      readerService.addBookIntoReads(reader.userId, book.bookId).then((res) => {
+        if (res.data.success)
+          navigation.navigate("Review", { book: book, reader: reader });
+      });
+  }
+  };
 
   return (
-    <View className="pt-3 bg-gray-100 w-screen">
+    <View className="pt-3 bg-gray-100 w-screen relative">
       <Text className="px-6 font-semibold text-xl text-[#3D405B]">
         Currently Reading
       </Text>
+      <View className="absolute top-9 right-5 items-center justify-center z-20 w-9 h-9 rounded-full bg-[#F2F2F2] shadow-lg border border-gray-300">
+        <BookOpenIcon size={30} color={"#3D405B"} />
+      </View>
       <ScrollView horizontal>
-        <ImageBackground
-          source={require("../assets/discover-image.png")}
-          blurRadius={40}
-          className="w-screen h-52 mt-3 flex-row py-5"
-        >
-          <Image
-            source={require("../assets/discover-image.png")}
-            className="w-24 h-52 mx-10"
-          />
-          <View className="flex">
-            <Text className="text-white font-bold text-lg">
-              Gece Yarısı Kütüphanesi
-            </Text>
-            <Text className="text-white font-semibold text-base">
-              Matt Haig
-            </Text>
-            <View className="flex-row items-center space-x-1 mt-2">
-              <StarIcon size={20} color="#E07A5F" />
-              <Text className="text-[#E07A5F] text-base font-semibold">
-                4.5
+        {books.map((book) => (
+          <ImageBackground
+            key={book.bookId}
+            source={{ uri: book.bookImage.imageUrl }}
+            blurRadius={40}
+            className="w-screen h-52 mt-3 flex-row py-5"
+          >
+            <Image
+              source={{ uri: book.bookImage.imageUrl }}
+              className="w-24 h-40 my-auto mx-10 rounded-md"
+            />
+            <View className="flex">
+              <Text className="text-white font-bold text-lg">{book.title}</Text>
+              <Text className="text-white font-semibold text-base">
+                {book.author.fullName}
               </Text>
+              <View className="flex-row items-center space-x-1 mt-2">
+                <StarIcon size={20} color="#E07A5F" />
+                <Text className="text-[#E07A5F] text-base font-semibold">
+                  {book.rating.meanOfRating}
+                </Text>
+              </View>
+              <View className="mt-4 mx-auto">
+                <SelectDropdown
+                  data={options}
+                  defaultButtonText={"Currently Reading"}
+                  buttonTextStyle={{
+                    color: "white",
+                    fontSize: 14,
+                    fontWeight: "bold",
+                  }}
+                  buttonStyle={{
+                    backgroundColor: "#81B29A",
+                    borderRadius: 10,
+                    height: 45,
+                    width: 200,
+                  }}
+                  renderDropdownIcon={() => (
+                    <CheckIcon size={20} color="white" />
+                  )}
+                  onSelect={(selectedItem, index) => {
+                    changeBookStatusForReader(selectedItem, book);
+                  }}
+                  dropdownStyle={{ borderRadius: 10 }}
+                  rowTextStyle={{ fontSize: 16, fontWeight: "400" }}
+                  buttonTextAfterSelection={(selectedItem, index) => {
+                    return selectedItem;
+                  }}
+                  rowTextForSelection={(item, index) => {
+                    return item;
+                  }}
+                />
+              </View>
             </View>
-            <View className="mt-4 mx-auto">
-              <SelectDropdown
-                data={options}
-                defaultValue={"Currently Reading"}
-                buttonTextStyle={{
-                  color: "white",
-                  fontSize: 14,
-                  fontWeight: "bold",
-                }}
-                buttonStyle={{
-                  backgroundColor: "#81B29A",
-                  borderRadius: 10,
-                  height: 45,
-                  width: 200,
-                }}
-                renderDropdownIcon={() => <CheckIcon size={20} color="white" />}
-                onSelect={(selectedItem, index) => {}}
-                dropdownStyle={{ borderRadius: 10 }}
-                rowTextStyle={{ fontSize: 16, fontWeight: "400" }}
-                buttonTextAfterSelection={(selectedItem, index) => {
-                  return selectedItem;
-                }}
-                rowTextForSelection={(item, index) => {
-                  return item;
-                }}
-              />
-            </View>
-          </View>
-        </ImageBackground>
+          </ImageBackground>
+        ))}
       </ScrollView>
     </View>
   );

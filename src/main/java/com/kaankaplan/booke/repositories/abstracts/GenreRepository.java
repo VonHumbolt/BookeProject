@@ -10,4 +10,6 @@ public interface GenreRepository {
     Genre saveOrUpdate(Genre genre);
 
     List<Genre> getFirstThreeGenres();
+
+    Genre getGenreById(String genreId);
 }

@@ -3,12 +3,15 @@ package com.kaankaplan.booke.business.concretes;
 import com.kaankaplan.booke.business.abstracts.GenreService;
 import com.kaankaplan.booke.business.messages.Constant;
 import com.kaankaplan.booke.core.util.results.DataResult;
+import com.kaankaplan.booke.core.util.results.ErrorDataResult;
 import com.kaankaplan.booke.core.util.results.Result;
 import com.kaankaplan.booke.core.util.results.SuccessDataResult;
+import com.kaankaplan.booke.modals.Book;
 import com.kaankaplan.booke.modals.Genre;
 import com.kaankaplan.booke.repositories.abstracts.GenreRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.util.bcel.Const;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -35,5 +38,15 @@ public class GenreServiceImpl implements GenreService {
     @Override
     public DataResult<List<Genre>> getFirstThreeGenres() {
         return new SuccessDataResult<>(genreRepository.getFirstThreeGenres());
+    }
+
+    @Override
+    public DataResult<Genre> addBooksToGenre(String genreId, List<Book> books) {
+        Genre genre = genreRepository.getGenreById(genreId);
+        if(genre == null)
+            return new ErrorDataResult<>(Constant.GENRE_NOT_FOUND);
+
+        genre.books.addAll(books);
+        return new SuccessDataResult<>(genreRepository.saveOrUpdate(genre));
     }
 }

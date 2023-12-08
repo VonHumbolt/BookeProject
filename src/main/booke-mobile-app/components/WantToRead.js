@@ -1,31 +1,35 @@
-import { View, Text, ScrollView, Image } from 'react-native'
-import React from 'react'
+import { View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
+import React from "react";
 
-const WantToRead = () => {
+const WantToRead = ({ books, navigation }) => {
   return (
     <View className="bg-gray-100 shadow-lg">
-      <Text className="mt-6 mb-2 mx-6 text-lg font-semibold text-[#3D405B]">Want To Read</Text>
+      <Text className="mt-6 mb-2 mx-6 text-lg font-semibold text-[#3D405B]">
+        Want To Read
+      </Text>
       <View className="px-6 py-3 bg-white">
-        <Text>20 books · See More</Text>
-        <ScrollView horizontal
-        className="space-x-6 my-2">
-            {/* Book Images */}
-            <Image 
-                source={require("../assets/discover-image.png")}
-                className="w-24 h-36"
-            />
-            <Image 
-                source={require("../assets/discover-image.png")}
-                className="w-24 h-36"
-            />
-            <Image 
-                source={require("../assets/discover-image.png")}
-                className="w-24 h-36"
-            />
+        <Text>
+          {books.length} {books.length > 1 ? "books" : "book"}
+        </Text>
+        <ScrollView horizontal className="space-x-6 my-2">
+          {/* Book Images */}
+          {books?.slice(0, 5).map((book) => (
+            <TouchableOpacity
+              key={book.bookId}
+              onPress={() =>
+                navigation.navigate("BookDetail", { bookId: book.bookId })
+              }
+            >
+              <Image
+                source={{ uri: book?.bookImage?.imageUrl }}
+                className="w-24 h-40 rounded-md"
+              />
+            </TouchableOpacity>
+          ))}
         </ScrollView>
       </View>
     </View>
-  )
-}
+  );
+};
 
-export default WantToRead
+export default WantToRead;

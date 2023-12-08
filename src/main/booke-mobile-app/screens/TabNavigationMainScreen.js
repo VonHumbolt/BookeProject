@@ -1,4 +1,3 @@
-import { View, Text } from "react-native";
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "./HomeScreen";
@@ -7,6 +6,11 @@ import {
   HomeIcon,
   UserIcon,
 } from "react-native-heroicons/solid";
+import {
+  GlobeEuropeAfricaIcon as Globe,
+  HomeIcon as Home,
+  UserIcon as User,
+} from "react-native-heroicons/outline";
 import DiscoverScreen from "./DiscoverScreen";
 import ProfileScreen from "./ProfileScreen";
 
@@ -17,33 +21,43 @@ const TabNavigationMainScreen = () => {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
+        tabBarShowLabel: false
       }}
     >
       <Tab.Screen
         name="Home"
         component={HomeScreen}
         options={{
-          title: "Home",
-          tabBarActiveTintColor: "#E07A5F",
-          tabBarIcon: () => <HomeIcon color="#E07A5F" size={30} />,
+          tabBarIcon: ({ focused }) =>
+            focused ? (
+              <HomeIcon color="#E07A5F" size={30} />
+            ) : (
+              <Home color="#E07A5F" size={30} />
+            ),
         }}
       />
       <Tab.Screen
         name="Discover"
         component={DiscoverScreen}
         options={{
-          title: "Discover",
-          tabBarActiveTintColor: "#E07A5F",
-          tabBarIcon: () => <GlobeEuropeAfricaIcon color="#E07A5F" size={30} />,
+          tabBarIcon: ({ focused }) =>
+            focused ? (
+              <GlobeEuropeAfricaIcon color="#E07A5F" size={30} />
+            ) : (
+              <Globe color="#E07A5F" size={30} />
+            ),
         }}
       />
       <Tab.Screen
         name="Profile"
         component={ProfileScreen}
         options={{
-          title: "Profile",
-          tabBarActiveTintColor: "#E07A5F",
-          tabBarIcon: () => <UserIcon color="#E07A5F" size={30} />,
+          tabBarIcon: ({ focused }) =>
+            focused ? (
+              <UserIcon color="#E07A5F" size={30} />
+            ) : (
+              <User color="#E07A5F" size={30} />
+            ),
         }}
       />
     </Tab.Navigator>

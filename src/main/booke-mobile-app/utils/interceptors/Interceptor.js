@@ -18,6 +18,8 @@ export default class Interceptor {
 
         // Request
         this.axiosInstance.interceptors.request.use( async (request) => {
+            console.log("Request url --> " + request.url)
+            console.log("Request token --> " + this.token)
             if (this.token != null && request.url != "auth/refreshToken") {
                 request.headers = {
                     ...request.headers,

@@ -82,8 +82,7 @@ public class AuthServiceImpl implements AuthService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         User userPrincipal = (User) authentication.getPrincipal();
         String refreshToken = refreshTokenService.generateRefreshToken(loginRequestDto.email()).getData().refreshToken;
-//        RegistrableUser user = registrableUserService.getUserByEmail(loginRequestDto.email()).getData();
-        Reader user = readerService.getReaderByEmail(loginRequestDto.email()).getData();
+        RegistrableUser user = registrableUserService.getUserByEmail(loginRequestDto.email()).getData();
         log.info("user --> " + user);
         return new SuccessDataResult<>(
                 new LoginResponseDto(

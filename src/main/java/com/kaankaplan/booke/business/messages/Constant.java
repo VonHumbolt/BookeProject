@@ -44,4 +44,5 @@ public final class Constant {
     public static final String READING_CHALLENGE_NOT_FOUND = "Reading challenge was not found!";
     public static final String READING_CHALLENGE_COMPLETED = "Reading challenge was completed!";
     public static final String READING_CHALLENGE_UPDATE = "Reading challenge is updated successfully!";
+    public static final String GENRE_NOT_FOUND = "Genre was not found!";
 }

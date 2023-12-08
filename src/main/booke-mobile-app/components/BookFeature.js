@@ -10,7 +10,7 @@ const BookFeature = ({
 }) => {
   return (
     <View className="bg-[#EEEEEE]">
-      <View className="flex-row items-center space-x-2 px-5 py-3 shadow-lg">
+      <View className="flex-row items-center space-x-2 px-5 py-3">
         <Text className="text-xl font-semibold text-[#3D405B]">Features</Text>
         <View className="w-12 h-1 bg-[#E07A5F]" />
       </View>

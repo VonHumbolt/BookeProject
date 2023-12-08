@@ -38,4 +38,9 @@ public class GenreRepositoryImpl implements GenreRepository {
         SearchHits<Genre> search = elasticsearchOperations.search(query, Genre.class);
         return search.get().map(SearchHit::getContent).toList();
     }
+
+    @Override
+    public Genre getGenreById(String genreId) {
+        return elasticsearchOperations.get(genreId, Genre.class);
+    }
 }

@@ -1,25 +1,13 @@
 import { View, Text } from "react-native";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { StarIcon } from "react-native-heroicons/solid";
 import ProgressBar from "react-native-progress/Bar";
 
 const BookRating = ({ rating }) => {
-    const [mean, setMean] = useState(0)
-  useEffect(() => {
-    const totalRate =
-      rating.oneStarCount * 1 +
-      rating.twoStarCount * 2 +
-      rating.threeStarCount * 3 +
-      rating.fourStarCount * 4 +
-      rating.fiveStarCount * 5;
-
-    const totalVote = rating.totalStarCount;
-    setMean(totalRate / totalVote);
-  }, []);
 
   return (
     <View className="pt-3 mb-2 bg-[#EEEEEE]">
-      <View className="flex-row items-center space-x-2 px-5 py-3 shadow-lg">
+      <View className="flex-row items-center space-x-2 px-5 py-3">
         <Text className="text-xl font-semibold text-[#3D405B]">
           Rating & Reviews
         </Text>
@@ -28,11 +16,11 @@ const BookRating = ({ rating }) => {
 
       <View className="flex shadow-lg bg-white px-5 py-3">
         <View className="flex-row items-center space-x-2">
-          <Text className="text-lg">{rating.totalStarCount} Ratings</Text>
+          <Text className="text-lg">{rating?.totalStarCount} Ratings</Text>
           <Text className="text-lg">·</Text>
           <View className="flex-row items-center">
             <StarIcon size={25} color={"#81B29A"} />
-            <Text className="text-lg">{mean}</Text>
+            <Text className="text-lg">{rating?.meanOfRating}</Text>
           </View>
         </View>
 
@@ -65,7 +53,7 @@ const BookRating = ({ rating }) => {
           {/* Progress Bars */}
           <View className="flex space-y-4">
             <ProgressBar
-              progress={rating.oneStarCount / rating.totalStarCount}
+              progress={rating?.oneStarCount > 0 ? rating?.oneStarCount / rating?.totalStarCount : 0}
               color="#E07A5F"
               unfilledColor="#D9D9D9"
               borderWidth={0}
@@ -73,7 +61,7 @@ const BookRating = ({ rating }) => {
               height={10}
             />
             <ProgressBar
-              progress={rating.twoStarCount / rating.totalStarCount}
+              progress={rating?.twoStarCount > 0 ? rating?.twoStarCount / rating?.totalStarCount : 0}
               color="#E07A5F"
               unfilledColor="#D9D9D9"
               borderWidth={0}
@@ -81,7 +69,7 @@ const BookRating = ({ rating }) => {
               height={10}
             />
             <ProgressBar
-              progress={rating.threeStarCount / rating.totalStarCount}
+              progress={rating?.threeStarCount > 0 ? rating?.threeStarCount / rating?.totalStarCount : 0}
               color="#E07A5F"
               unfilledColor="#D9D9D9"
               borderWidth={0}
@@ -89,7 +77,7 @@ const BookRating = ({ rating }) => {
               height={10}
             />
             <ProgressBar
-              progress={rating.fourStarCount / rating.totalStarCount}
+              progress={rating?.fourStarCount > 0 ? rating?.fourStarCount / rating?.totalStarCount : 0}
               color="#E07A5F"
               unfilledColor="#D9D9D9"
               borderWidth={0}
@@ -97,7 +85,7 @@ const BookRating = ({ rating }) => {
               height={10}
             />
             <ProgressBar
-              progress={rating.fiveStarCount / rating.totalStarCount}
+              progress={rating?.fiveStarCount > 0 ? rating?.fiveStarCount / rating?.totalStarCount : 0}
               color="#E07A5F"
               unfilledColor="#D9D9D9"
               borderWidth={0}
@@ -108,11 +96,11 @@ const BookRating = ({ rating }) => {
 
           {/* Rating Count */}
           <View className="flex space-y-1">
-            <Text className="text-base text-[#3D405B]">{rating.oneStarCount}</Text>
-            <Text className="text-base text-[#3D405B]">{rating.twoStarCount}</Text>
-            <Text className="text-base text-[#3D405B]">{rating.threeStarCount}</Text>
-            <Text className="text-base text-[#3D405B]">{rating.fourStarCount}</Text>
-            <Text className="text-base text-[#3D405B]">{rating.fiveStarCount}</Text>
+            <Text className="text-base text-[#3D405B]">{rating?.oneStarCount}</Text>
+            <Text className="text-base text-[#3D405B]">{rating?.twoStarCount}</Text>
+            <Text className="text-base text-[#3D405B]">{rating?.threeStarCount}</Text>
+            <Text className="text-base text-[#3D405B]">{rating?.fourStarCount}</Text>
+            <Text className="text-base text-[#3D405B]">{rating?.fiveStarCount}</Text>
           </View>
         </View>
       </View>
