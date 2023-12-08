@@ -5,7 +5,7 @@ import SelectDropdown from "react-native-select-dropdown";
 import { CheckIcon } from "react-native-heroicons/outline";
 import ReaderService from "../services/ReaderService";
 
-const CurrentlyReading = ({ books, reader, navigation }) => {
+const CurrentlyReading = ({ books, reader, isUserProfile, refresh, navigation }) => {
   const readerService = new ReaderService();
   const options = ["Want To Read", "Read"];
 
@@ -14,7 +14,7 @@ const CurrentlyReading = ({ books, reader, navigation }) => {
       readerService
         .addBookIntoWantToReads(reader.userId, book.bookId)
         .then((res) => {
-           
+          refresh()
         });
     }
 
@@ -46,7 +46,7 @@ const CurrentlyReading = ({ books, reader, navigation }) => {
               source={{ uri: book.bookImage.imageUrl }}
               className="w-24 h-40 my-auto mx-10 rounded-md"
             />
-            <View className="flex">
+            <View className={`flex ${isUserProfile ? "mt-0" : "mt-5"}`}>
               <Text className="text-white font-bold text-lg">{book.title}</Text>
               <Text className="text-white font-semibold text-base">
                 {book.author.fullName}
@@ -57,37 +57,39 @@ const CurrentlyReading = ({ books, reader, navigation }) => {
                   {book.rating.meanOfRating}
                 </Text>
               </View>
-              <View className="mt-4 mx-auto">
-                <SelectDropdown
-                  data={options}
-                  defaultButtonText={"Currently Reading"}
-                  buttonTextStyle={{
-                    color: "white",
-                    fontSize: 14,
-                    fontWeight: "bold",
-                  }}
-                  buttonStyle={{
-                    backgroundColor: "#81B29A",
-                    borderRadius: 10,
-                    height: 45,
-                    width: 200,
-                  }}
-                  renderDropdownIcon={() => (
-                    <CheckIcon size={20} color="white" />
-                  )}
-                  onSelect={(selectedItem, index) => {
-                    changeBookStatusForReader(selectedItem, book);
-                  }}
-                  dropdownStyle={{ borderRadius: 10 }}
-                  rowTextStyle={{ fontSize: 16, fontWeight: "400" }}
-                  buttonTextAfterSelection={(selectedItem, index) => {
-                    return selectedItem;
-                  }}
-                  rowTextForSelection={(item, index) => {
-                    return item;
-                  }}
-                />
-              </View>
+              {isUserProfile && (
+                <View className="mt-4 mx-auto">
+                  <SelectDropdown
+                    data={options}
+                    defaultButtonText={"Currently Reading"}
+                    buttonTextStyle={{
+                      color: "white",
+                      fontSize: 14,
+                      fontWeight: "bold",
+                    }}
+                    buttonStyle={{
+                      backgroundColor: "#81B29A",
+                      borderRadius: 10,
+                      height: 45,
+                      width: 200,
+                    }}
+                    renderDropdownIcon={() => (
+                      <CheckIcon size={20} color="white" />
+                    )}
+                    onSelect={(selectedItem, index) => {
+                      changeBookStatusForReader(selectedItem, book);
+                    }}
+                    dropdownStyle={{ borderRadius: 10 }}
+                    rowTextStyle={{ fontSize: 16, fontWeight: "400" }}
+                    buttonTextAfterSelection={(selectedItem, index) => {
+                      return selectedItem;
+                    }}
+                    rowTextForSelection={(item, index) => {
+                      return item;
+                    }}
+                  />
+                </View>
+              )}
             </View>
           </ImageBackground>
         ))}

@@ -8,9 +8,19 @@ const WantToRead = ({ books, navigation }) => {
         Want To Read
       </Text>
       <View className="px-6 py-3 bg-white">
-        <Text>
-          {books.length} {books.length > 1 ? "books" : "book"}
-        </Text>
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate("Book", {
+              name: "Want To Read Books",
+              books: books,
+            })
+          }
+        >
+          <Text>
+            {books?.length} {books?.length > 1 ? "books" : "book"} · See More
+          </Text>
+        </TouchableOpacity>
+
         <ScrollView horizontal className="space-x-6 my-2">
           {/* Book Images */}
           {books?.slice(0, 5).map((book) => (

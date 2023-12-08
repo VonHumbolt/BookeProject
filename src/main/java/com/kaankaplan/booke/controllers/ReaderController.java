@@ -82,9 +82,4 @@ public class ReaderController {
     public Result startReadingChallenge(@PathVariable String userId, @PathVariable int target) {
         return readerService.startReadingChallenge(userId, target);
     }
-
-    @PostMapping("updateChallenge/{userId}/{challengeId}/{bookId}")
-    public Result updateReadingChallenge(@PathVariable String userId, @PathVariable String challengeId, @PathVariable String bookId) {
-        return readerService.updateReadingChallenge(userId, challengeId, bookId);
-    }
 }

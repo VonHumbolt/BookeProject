@@ -8,6 +8,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -33,7 +36,8 @@ public class RatingServiceImpl implements RatingService {
     private double calculateMeanOfRating(Rating rating) {
         double totalPoint = rating.oneStarCount + rating.twoStarCount * 2 + rating.threeStarCount * 3
                 + rating.fourStarCount * 4 + rating.fiveStarCount * 5;
-        return totalPoint / rating.totalStarCount;
+        BigDecimal bd = new BigDecimal( totalPoint / rating.totalStarCount).setScale(2, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 
 }

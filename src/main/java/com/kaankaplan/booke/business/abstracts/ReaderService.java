@@ -37,5 +37,4 @@ public interface ReaderService {
 
     Result startReadingChallenge(String userId, int target);
 
-    Result updateReadingChallenge(String userId, String challengeId, String bookId);
 }

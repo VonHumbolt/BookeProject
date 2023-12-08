@@ -74,6 +74,7 @@ public class ReaderServiceImpl implements ReaderService {
     @Override
     public Result follow(String userId, String wantToFollowUserId) {
         Reader reader = readerRepository.getReaderById(userId);
+        Reader wantToFollowReader = readerRepository.getReaderById(wantToFollowUserId);
 
         if (reader == null)
             return new ErrorResult(Constant.READER_WAS_NOT_FOUND);
@@ -82,6 +83,8 @@ public class ReaderServiceImpl implements ReaderService {
             log.info("User is not in the follows");
             reader.followsIdList.add(wantToFollowUserId);
             readerRepository.saveReader(reader);
+            wantToFollowReader.followersIdList.add(userId);
+            readerRepository.saveReader(wantToFollowReader);
             return new SuccessResult(Constant.FOLLOW_READER);
         }
 
@@ -93,6 +96,7 @@ public class ReaderServiceImpl implements ReaderService {
     @Override
     public Result unfollow(String userId, String wantToUnfollowUserId) {
         Reader reader = readerRepository.getReaderById(userId);
+        Reader wantToUnfollowReader = readerRepository.getReaderById(wantToUnfollowUserId);
 
         if (reader == null)
             return new ErrorResult(Constant.READER_WAS_NOT_FOUND);
@@ -101,6 +105,8 @@ public class ReaderServiceImpl implements ReaderService {
             log.info("User is in the follows");
             reader.followsIdList.remove(wantToUnfollowUserId);
             readerRepository.saveReader(reader);
+            wantToUnfollowReader.followersIdList.remove(userId);
+            readerRepository.saveReader(wantToUnfollowReader);
             return new SuccessResult(Constant.UNFOLLOW_READER);
         }
 
@@ -197,6 +203,16 @@ public class ReaderServiceImpl implements ReaderService {
             reader.wantToReadBooks.remove(book);
 
         reader.readBooks.add(book);
+//        Update Reading Challenge
+        DataResult<ReadingChallenge> challengeDataResult = updateReadingChallenge(reader, bookId);
+        if(challengeDataResult.isSuccess()) {
+            ReadingChallenge challenge = challengeDataResult.getData();
+            log.info("Currently active challenge ---> " + challenge);
+            reader.readingChallenges.remove(challenge);
+            reader.readingChallenges.add(challenge);
+            log.info("Reader new challenges ---> " + reader.readingChallenges);
+        }
+
         readerRepository.saveReader(reader);
         return new SuccessResult(Constant.BOOK_ADDED_IN_READS);
     }
@@ -238,19 +254,17 @@ public class ReaderServiceImpl implements ReaderService {
         return new SuccessResult(Constant.READING_CHALLENGE_START);
     }
 
-    @Override
-    public Result updateReadingChallenge(String userId, String challengeId, String bookId) {
-        Reader reader = readerRepository.getReaderById(userId);
-        if(reader == null)
-            return new ErrorResult(Constant.READER_WAS_NOT_FOUND);
-
+    private DataResult<ReadingChallenge> updateReadingChallenge(Reader reader, String bookId) {
         log.info("Reader old challenges ---> " + reader.readingChallenges);
-        ReadingChallenge challenge = readingChallengeService.updateReadingChallenge(challengeId, bookId).getData();
-        log.info("Currently active challenge ---> " + challenge);
-        reader.readingChallenges.remove(challenge);
-        reader.readingChallenges.add(challenge);
-        log.info("Reader new challenges ---> " + reader.readingChallenges);
-        readerRepository.saveReader(reader);
-        return challenge.isActive ? new SuccessResult(Constant.READING_CHALLENGE_UPDATE) : new SuccessResult(Constant.READING_CHALLENGE_COMPLETED);
+        ReadingChallenge challenge = null;
+        for (ReadingChallenge readingChallenge : reader.readingChallenges) {
+            if(readingChallenge.isActive)
+                challenge = readingChallenge;
+        }
+        if(challenge != null) {
+            ReadingChallenge savedChallenge = readingChallengeService.updateReadingChallenge(challenge.getChallengeId(), bookId).getData();
+            return new SuccessDataResult<>(savedChallenge, Constant.READING_CHALLENGE_UPDATE);
+        }
+        return new ErrorDataResult<>(Constant.READING_CHALLENGE_NOT_FOUND);
     }
 }

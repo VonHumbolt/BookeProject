@@ -11,6 +11,18 @@ export default class ReaderService {
     getReaderByEmail(email) {
         return this.axiosInstance.get(this.apiUrl + "getReaderByEmail/" + email);
     }
+    
+    getReaderById(readerId) {
+        return this.axiosInstance.get(this.apiUrl + "getReaderById/" + readerId);
+    }
+
+    getReaderFollows(readerId) {
+        return this.axiosInstance.get(this.apiUrl + "getReaderFollows/" + readerId);
+    }
+
+    getReaderFollowers(readerId) {
+        return this.axiosInstance.get(this.apiUrl + "getReaderFollowers/" + readerId);
+    }
 
     getBookStatusForUser(userId, bookId) {
         return this.axiosInstance.get(this.apiUrl + "getBookStatus/" + userId + "/" + bookId);
@@ -26,5 +38,22 @@ export default class ReaderService {
 
     addBookIntoReads(userId, bookId) {
         return this.axiosInstance.post(this.apiUrl + "addRead/" + userId + "/" + bookId, {});
+    }
+
+    startReadingChallenge(userId, target) {
+        return this.axiosInstance.post(this.apiUrl + "startChallenge/" + userId + "/" + target, {})
+    }
+
+    searchReader(name) {
+        console.log(this.apiUrl + "search/" + name)
+        return this.axiosInstance.get(this.apiUrl + "search/" + name);
+    }
+
+    follow(userId, wantToFollowUserId) {
+        return this.axiosInstance.post(this.apiUrl + "follow/" + userId + "/" + wantToFollowUserId, {});
+    }
+
+    unfollow(userId, wantToUnfollowUserId) {
+        return this.axiosInstance.post(this.apiUrl + "unfollow/" + userId + "/" + wantToUnfollowUserId, {});
     }
 }
