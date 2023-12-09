@@ -8,7 +8,6 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { UserGroupIcon, UsersIcon } from "react-native-heroicons/solid";
 import CurrentlyReading from "../components/CurrentlyReading";
 import CurrentStats from "../components/CurrentStats";
 import WantToRead from "../components/WantToRead";
@@ -31,21 +30,24 @@ const ProfileScreen = () => {
         if (res.data.success) setReader(res.data.data);
       });
     });
-  }, [isFocused, isRefresh]);
+  }, [isFocused]);
 
   const refresh = () => {
     setIsRefresh(!isRefresh);
   };
+
   return (
     <SafeAreaView className="bg-[#E07A5F] flex-1">
       <View className="py-6 px-8 flex-row items-center">
-        <Image
-          source={{ uri: reader?.profileImage.imageUrl }}
-          className="w-24 h-24 rounded-full"
-          width={20}
-          height={20}
-        />
-        <View className="absolute left-6 border-2 border-[#C44536] rounded-full h-[110px] w-[110px]" />
+          <View className="absolute left-6 border-2 border-[#C44536] rounded-full h-[110px] w-[110px]" />
+        <TouchableOpacity>
+          <Image
+            source={{ uri: reader?.profileImage.imageUrl }}
+            className="w-24 h-24 rounded-full"
+            width={20}
+            height={20}
+          />
+        </TouchableOpacity>
         <View className="flex-1 ">
           <Text className="px-6 text-white text-center font-bold text-2xl">
             {reader?.fullName}
@@ -102,6 +104,7 @@ const ProfileScreen = () => {
           read={reader?.readBooks}
           wantToReads={reader?.wantToReadBooks}
           currentlyBooks={reader?.currentlyBooks}
+          navigation={navigation}
         />
 
         {/* Want To Reads */}

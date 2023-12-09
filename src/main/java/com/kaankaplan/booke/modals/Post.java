@@ -23,6 +23,7 @@ public class Post {
     public String bookName;
     public String authorName;
     public String bookImageUrl;
+    public double meanOfRating;
     public int likeCount;
     public List<String> usersWhoLikePost;
     public List<Comment> comments;
@@ -30,7 +31,7 @@ public class Post {
     public Date publishedDate;
 
     public Post(String userId, String fullName, String profilePictureUrl, String activity,
-                String bookName, String authorName, String bookImageUrl) {
+                String bookName, String authorName, String bookImageUrl, double meanOfRating) {
         this();
         this.userId = userId;
         this.fullName = fullName;
@@ -39,6 +40,7 @@ public class Post {
         this.bookName = bookName;
         this.authorName = authorName;
         this.bookImageUrl = bookImageUrl;
+        this.meanOfRating = meanOfRating;
     }
 
     public Post() {

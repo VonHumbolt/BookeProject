@@ -11,6 +11,7 @@ import SearchUserScreen from "./screens/SearchUserScreen";
 import ReaderProfileScreen from "./screens/ReaderProfileScreen";
 import FriendsScreen from "./screens/FriendsScreen";
 import BookScreen from "./screens/BookScreen";
+import CommentScreen from "./screens/CommentScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -107,6 +108,17 @@ export default function App() {
           })}
           name="Book"
           component={BookScreen}
+        />
+        <Stack.Screen
+          options={{
+            title: "Comments",
+            headerTintColor: "white",
+            headerStyle: {
+              backgroundColor: "#E07A5F",
+            },
+          }}
+          name="Comment"
+          component={CommentScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

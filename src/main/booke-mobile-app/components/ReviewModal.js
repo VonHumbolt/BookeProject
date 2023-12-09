@@ -10,10 +10,12 @@ import React, { useState } from "react";
 import { StarIcon } from "react-native-heroicons/solid";
 import { StatusBar } from "expo-status-bar";
 import BookService from "../services/BookService";
+import PostService from "../services/PostService";
 
 const ReviewModal = ({ route, navigation }) => {
   const { book, reader } = route.params;
   const bookService = new BookService();
+  const postService = new PostService();
 
   const [starRate, setStarRate] = useState(0);
   const [reviewText, setReviewText] = useState("");
@@ -27,7 +29,22 @@ const ReviewModal = ({ route, navigation }) => {
         star: starRate,
       };
       bookService.addReviewToBook(book.bookId, review).then((res) => {
-        if (res.data.success) navigation.goBack();
+        if (res.data.success) {
+          const postDto = {
+            userId: reader?.userId,
+            fullName: reader?.fullName,
+            profilePictureUrl: reader?.profileImage?.imageUrl,
+            activity: "Gave " + starRate + " Star to",
+            bookId: book?.bookId,
+            bookName: book?.title,
+            authorName: book?.author?.fullName,
+            bookImageUrl: book?.bookImage?.imageUrl,
+            rating: book?.rating?.meanOfRating,
+          };
+          postService.createPost(postDto).then((response) => {
+            if (response.data.success) navigation.goBack();
+          });
+        }
       });
     }
   };

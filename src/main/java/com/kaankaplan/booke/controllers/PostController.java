@@ -4,6 +4,7 @@ import com.kaankaplan.booke.business.abstracts.PostService;
 import com.kaankaplan.booke.core.util.results.DataResult;
 import com.kaankaplan.booke.core.util.results.Result;
 import com.kaankaplan.booke.dto.PostDto;
+import com.kaankaplan.booke.modals.Comment;
 import com.kaankaplan.booke.modals.Post;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -34,5 +35,10 @@ public class PostController {
     @PostMapping("unlikePost/{userId}/{postId}")
     public Result unlikePost(@PathVariable String userId, @PathVariable String postId) {
         return postService.unlikePost(userId, postId);
+    }
+
+    @PostMapping("addCommentToPost/{postId}")
+    public DataResult<Comment> addCommentToPost(@PathVariable String postId, @RequestBody Comment comment) {
+        return postService.addCommentToPost(postId, comment);
     }
 }

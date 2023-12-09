@@ -20,7 +20,7 @@ const DiscoverScreen = ({navigation}) => {
 
   return (
     <SafeAreaView className="bg-[#E07A5F] flex-1">
-      <ScrollView className="bg-gray-100 flex-1">
+      <ScrollView className="bg-gray-100">
         <View className="px-12 pt-5 pb-10 relative bg-[#E07A5F]">
           <Image
             source={require("../assets/logo.png")}

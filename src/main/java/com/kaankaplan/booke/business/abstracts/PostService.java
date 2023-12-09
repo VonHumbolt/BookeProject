@@ -3,6 +3,7 @@ package com.kaankaplan.booke.business.abstracts;
 import com.kaankaplan.booke.core.util.results.DataResult;
 import com.kaankaplan.booke.core.util.results.Result;
 import com.kaankaplan.booke.dto.PostDto;
+import com.kaankaplan.booke.modals.Comment;
 import com.kaankaplan.booke.modals.Post;
 
 import java.util.List;
@@ -16,4 +17,6 @@ public interface PostService {
     Result likePost(String userId, String postId);
 
     Result unlikePost(String userId, String postId);
+
+    DataResult<Comment> addCommentToPost(String postId, Comment comment);
 }

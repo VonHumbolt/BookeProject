@@ -1,4 +1,11 @@
-import { View, Text, Image, ImageBackground, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  ImageBackground,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import BookFeature from "../components/BookFeature";
@@ -8,9 +15,10 @@ import BookReview from "../components/BookReview";
 import SelectDropdown from "react-native-select-dropdown";
 import * as SecureStore from "expo-secure-store";
 import ReaderService from "../services/ReaderService";
-import { CheckIcon } from "react-native-heroicons/solid";
+import { CheckIcon, ChevronLeftIcon } from "react-native-heroicons/solid";
 import { useNavigation, useIsFocused } from "@react-navigation/native";
 import BookService from "../services/BookService";
+import PostService from "../services/PostService";
 
 const BookDetailScreen = ({ route }) => {
   const isFocused = useIsFocused();
@@ -18,16 +26,17 @@ const BookDetailScreen = ({ route }) => {
   const { bookId } = route.params;
   const readerService = new ReaderService();
   const bookService = new BookService();
+  const postService = new PostService();
 
   const options = ["Want To Read", "Currently Reading", "Read"];
 
   const [selectedItem, setSelectedItem] = useState();
   const [userId, setUserId] = useState(0);
   const [reader, setReader] = useState({});
-  const [book, setBook] = useState({})
+  const [book, setBook] = useState({});
 
   useEffect(() => {
-    bookService.getBookById(bookId).then(res => setBook(res.data.data))
+    bookService.getBookById(bookId).then((res) => setBook(res.data.data));
     SecureStore.getItemAsync("readerId").then((readerId) => {
       setUserId(readerId);
       readerService.getBookStatusForUser(readerId, bookId).then((res) => {
@@ -60,6 +69,18 @@ const BookDetailScreen = ({ route }) => {
         navigation.navigate("Review", { book: book, reader: reader });
       });
     }
+    const postDto = {
+      userId: userId,
+      fullName: reader?.fullName,
+      profilePictureUrl: reader?.profileImage?.imageUrl,
+      activity: item,
+      bookId: book?.bookId,
+      bookName: book?.title,
+      authorName: book?.author?.fullName,
+      bookImageUrl: book?.bookImage?.imageUrl,
+      rating: book?.rating?.meanOfRating,
+    };
+    postService.createPost(postDto).then((res) => {});
   };
 
   return (
@@ -67,6 +88,11 @@ const BookDetailScreen = ({ route }) => {
       <ScrollView>
         {/* Image */}
         <View className="flex-1">
+          <TouchableOpacity className="absolute top-12 left-5 p-2 bg-[#E07A5F] z-10 rounded-full"
+            onPress={() => navigation.goBack()}
+          >
+            <ChevronLeftIcon size={20} color="white" />
+          </TouchableOpacity>
           <ImageBackground
             source={{ uri: book?.bookImage?.imageUrl }}
             blurRadius={30}

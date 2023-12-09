@@ -1,10 +1,12 @@
 package com.kaankaplan.booke.business.concretes;
 
+import com.kaankaplan.booke.business.abstracts.CommentService;
 import com.kaankaplan.booke.business.abstracts.PostService;
 import com.kaankaplan.booke.business.abstracts.ReaderService;
 import com.kaankaplan.booke.business.messages.Constant;
 import com.kaankaplan.booke.core.util.results.*;
 import com.kaankaplan.booke.dto.PostDto;
+import com.kaankaplan.booke.modals.Comment;
 import com.kaankaplan.booke.modals.Post;
 import com.kaankaplan.booke.modals.Reader;
 import com.kaankaplan.booke.repositories.abstracts.PostRepository;
@@ -25,12 +27,13 @@ public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
     private final ReaderService readerService;
+    private final CommentService commentService;
 
     @Transactional
     @Override
     public DataResult<Post> saveOrUpdate(PostDto postDto) {
         Post post = new Post(postDto.userId(), postDto.fullName(), postDto.profilePictureUrl(),
-                postDto.activity(), postDto.bookName(), postDto.authorName(), postDto.bookImageUrl());
+                postDto.activity(), postDto.bookName(), postDto.authorName(), postDto.bookImageUrl(), postDto.rating());
         log.info("Post ---> " + post);
         Post savedPost = postRepository.saveOrUpdate(post);
         log.info("Saved Post ---> " + savedPost);
@@ -47,6 +50,7 @@ public class PostServiceImpl implements PostService {
         List<Post> timelinePosts = new ArrayList<>();
         List<Reader> readerFollows = result.getData();
         for(Reader reader : readerFollows) {
+            log.info("Reader -->" + reader);
             timelinePosts.addAll(getReaderPostDetail(reader));
         }
         log.info("timelinePosts ---> " + timelinePosts);
@@ -87,10 +91,21 @@ public class PostServiceImpl implements PostService {
         Post post = postRepository.getPostById(postId);
         if (post == null)
             return new ErrorResult(Constant.POST_NOT_FOUND);
-        // TODO: Kullanıcı karşısına çıkan post'u daha önce beğenip beğenmediğini nasıl görecek?
         post.likeCount -= 1;
         post.usersWhoLikePost.remove(userId);
         postRepository.saveOrUpdate(post);
         return new SuccessResult(Constant.UNLIKE_POST);
+    }
+
+    @Transactional
+    @Override
+    public DataResult<Comment> addCommentToPost(String postId, Comment comment) {
+        Post post = postRepository.getPostById(postId);
+        if (post == null)
+            return new ErrorDataResult<>(Constant.POST_NOT_FOUND);
+        Comment savedComment = commentService.saveComment(comment).getData();
+        post.comments.add(savedComment);
+        postRepository.saveOrUpdate(post);
+        return new SuccessDataResult<>(savedComment);
     }
 }

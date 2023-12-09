@@ -4,9 +4,17 @@ import { BookOpenIcon, StarIcon } from "react-native-heroicons/solid";
 import SelectDropdown from "react-native-select-dropdown";
 import { CheckIcon } from "react-native-heroicons/outline";
 import ReaderService from "../services/ReaderService";
+import PostService from "../services/PostService";
 
-const CurrentlyReading = ({ books, reader, isUserProfile, refresh, navigation }) => {
+const CurrentlyReading = ({
+  books,
+  reader,
+  isUserProfile,
+  refresh,
+  navigation,
+}) => {
   const readerService = new ReaderService();
+  const postService = new PostService();
   const options = ["Want To Read", "Read"];
 
   const changeBookStatusForReader = (item, book) => {
@@ -14,16 +22,29 @@ const CurrentlyReading = ({ books, reader, isUserProfile, refresh, navigation })
       readerService
         .addBookIntoWantToReads(reader.userId, book.bookId)
         .then((res) => {
-          refresh()
+          refresh();
         });
     }
+    
+    const postDto = {
+      userId: reader?.userId,
+      fullName: reader?.fullName,
+      profilePictureUrl: reader?.profileImage?.imageUrl,
+      activity: item,
+      bookId: book?.bookId,
+      bookName: book?.title,
+      authorName: book?.author?.fullName,
+      bookImageUrl: book?.bookImage?.imageUrl,
+      rating: book?.rating?.meanOfRating
+    }
+    postService.createPost(postDto).then(res => {})
 
     if (item == "Read") {
       readerService.addBookIntoReads(reader.userId, book.bookId).then((res) => {
         if (res.data.success)
           navigation.navigate("Review", { book: book, reader: reader });
       });
-  }
+    }
   };
 
   return (

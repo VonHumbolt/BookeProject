@@ -13,7 +13,7 @@ public class Comment {
     @Id
     private String commentId;
     public String message;
-    public RegistrableUser commentOwner;
+    public String commentOwnerName;
     @Field(name = "published_date", type = FieldType.Date)
     private final Date publishedDate;
 
@@ -21,13 +21,17 @@ public class Comment {
         this.publishedDate = new Date();
     }
 
-    public Comment(String message, RegistrableUser commentOwner) {
+    public Comment(String message, String commentOwnerName) {
         this();
         this.message = message;
-        this.commentOwner = commentOwner;
+        this.commentOwnerName = commentOwnerName;
     }
 
     public String getCommentId() {
         return commentId;
+    }
+
+    public Date getPublishedDate() {
+        return publishedDate;
     }
 }
