@@ -25,8 +25,8 @@ const EntryScreen = () => {
   return (
     <SafeAreaView className="flex-1 bg-[#E07A5F]">
       <View className="items-center justify-center mt-20">
-        <Image source={require("../assets/logo.png")} className="object-contain" />
-        <Image source={require("../assets/entry-image.png")} className="mt-20 w-96 object-cover" />
+        <Image source={require("../assets/logo.png")} className="w-80 h-24 object-contain" />
+        <Image source={require("../assets/entry-image.png")} className="mt-20 w-[400px] h-[400px] object-contain" />
       </View>
     </SafeAreaView>
   )

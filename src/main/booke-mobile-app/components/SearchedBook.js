@@ -15,7 +15,7 @@ const SearchedBook = ({ book }) => {
         source={{ uri: book?.bookImage?.imageUrl }}
         className="w-16 h-24 object-contain rounded-md"
       />
-      <View>
+      <View className="mx-5">
         <Text className="text-[#3D405B] text-lg font-semibold">
           {book.title}
         </Text>

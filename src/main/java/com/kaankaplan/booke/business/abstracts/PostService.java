@@ -12,7 +12,7 @@ public interface PostService {
 
     DataResult<Post> saveOrUpdate(PostDto postDto);
 
-    DataResult<List<Post>> getUserFollowsPost(String userId);
+    DataResult<List<Post>> getUserFollowsPost(String userId, int pageNo, int pageSize);
 
     Result likePost(String userId, String postId);
 

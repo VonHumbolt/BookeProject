@@ -1,14 +1,10 @@
 package com.kaankaplan.booke.modals;
 
 import lombok.ToString;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.Document;
 
 @ToString
-@Document(indexName = "rating")
 public class Rating {
 
-    @Id
     private String ratingId;
     public int oneStarCount;
     public int twoStarCount;

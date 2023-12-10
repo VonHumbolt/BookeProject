@@ -8,8 +8,8 @@ export default class PostService {
         this.axiosInstance = new Interceptor().getInstance();
     }
 
-    getUserFollowsPost(userId) {
-        return this.axiosInstance.get(this.apiUrl + "getUserFollowsPost/" + userId);
+    getUserFollowsPost(userId, pageNo, pageSize) {
+        return this.axiosInstance.get(this.apiUrl + "getUserFollowsPost/" + userId + "/" + pageNo + "/" + pageSize);
     }
 
     addCommentToPost(postId, comment) {

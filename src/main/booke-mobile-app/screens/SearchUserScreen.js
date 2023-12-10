@@ -30,7 +30,7 @@ const SearchUserScreen = ({ navigation }) => {
         <View className="shadow-xl">
           <TextInput
             className="rounded-xl p-3 px-8 w-full bg-white border border-gray-300"
-            placeholder="Search Book"
+            placeholder="Search New Users"
             value={name}
             onChangeText={(text) => searchReader(text)}
           />

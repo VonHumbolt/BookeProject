@@ -42,7 +42,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public DataResult<List<Post>> getUserFollowsPost(String userId) {
+    public DataResult<List<Post>> getUserFollowsPost(String userId, int pageNo, int pageSize) {
         DataResult<List<Reader>> result = readerService.getReadersFollows(userId);
         if(!result.isSuccess()) {
             return new ErrorDataResult<>(Constant.READER_WAS_NOT_FOUND);
@@ -51,7 +51,7 @@ public class PostServiceImpl implements PostService {
         List<Reader> readerFollows = result.getData();
         for(Reader reader : readerFollows) {
             log.info("Reader -->" + reader);
-            timelinePosts.addAll(getReaderPostDetail(reader));
+            timelinePosts.addAll(getReaderPostDetail(reader, pageNo, pageSize));
         }
         log.info("timelinePosts ---> " + timelinePosts);
         timelinePosts.sort(Comparator.comparing(Post::getPublishedDate));
@@ -60,7 +60,7 @@ public class PostServiceImpl implements PostService {
         return new SuccessDataResult<>(timelinePosts);
     }
 
-    private List<Post> getReaderPostDetail(Reader reader) {
+    private List<Post> getReaderPostDetail(Reader reader, int pageNo, int pageSize) {
         List<Post> posts = new ArrayList<>();
         for(String postId : reader.postIdList) {
             Post post = postRepository.getPostById(postId);
@@ -69,7 +69,12 @@ public class PostServiceImpl implements PostService {
         }
         posts.sort(Comparator.comparing(Post::getPublishedDate));
         Collections.reverse(posts);
-        return posts.size() > 5 ? posts.subList(0, 5) : posts;
+        // posts.size -> 13
+        // 0 5 - 5 10 - 10 15
+        if(pageNo > posts.size())
+            return new ArrayList<>();
+        return posts.size() > pageSize ? posts.subList(pageNo, pageSize) : posts.subList(pageNo, posts.size());
+//        return posts.size() > 5 ? posts.subList(0, 5) : posts;
     }
 
     @Transactional

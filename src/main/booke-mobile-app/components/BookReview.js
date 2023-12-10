@@ -23,9 +23,11 @@ const BookReview = ({ reviews }) => {
           <Text className="mt-1 text-gray-500">{convertDate(review?.publishedDate)}</Text>
 
           {/* Review */}
-          <Text className="my-3 px-4 text-[#3D405B]">
-            {review?.description}
-          </Text>
+          {review?.description && (
+            <Text className="my-3 px-4 text-[#3D405B]">
+              {review?.description}
+            </Text>
+          )}
 
           <View className="w-20 mt-3 mx-auto border border-[#DBDBDB]" />
         </View>

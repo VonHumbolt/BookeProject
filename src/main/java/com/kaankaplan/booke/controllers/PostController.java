@@ -7,6 +7,7 @@ import com.kaankaplan.booke.dto.PostDto;
 import com.kaankaplan.booke.modals.Comment;
 import com.kaankaplan.booke.modals.Post;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,9 +18,9 @@ import java.util.List;
 public class PostController {
     private final PostService postService;
 
-    @GetMapping("getUserFollowsPost/{userId}")
-    public DataResult<List<Post>> getUserFollowsPost(@PathVariable String userId) {
-        return postService.getUserFollowsPost(userId);
+    @GetMapping("getUserFollowsPost/{userId}/{pageNo}/{pageSize}")
+    public DataResult<List<Post>> getUserFollowsPost(@PathVariable String userId, @PathVariable int pageNo, @PathVariable int pageSize) {
+        return postService.getUserFollowsPost(userId, pageNo, pageSize);
     }
 
     @PostMapping("createPost")

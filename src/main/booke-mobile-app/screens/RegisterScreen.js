@@ -88,6 +88,7 @@ const RegisterScreen = () => {
                     onBlur={onBlur}
                     value={value}
                     keyboardType="email-address"
+                    autoCapitalize="none"
                     placeholder="example@example.com"
                   ></TextInput>
                   {error && (

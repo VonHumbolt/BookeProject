@@ -5,7 +5,7 @@ import BookService from "../services/BookService";
 import SearchedBook from "../components/SearchedBook";
 import { MagnifyingGlassIcon } from "react-native-heroicons/outline";
 import ReaderService from "../services/ReaderService";
-import * as SecureStore from 'expo-secure-store';
+import * as SecureStore from "expo-secure-store";
 import PostService from "../services/PostService";
 import Posts from "../components/Posts";
 import { useIsFocused } from "@react-navigation/native";
@@ -18,36 +18,39 @@ const HomeScreen = () => {
   const [title, setTitle] = useState("");
   const [books, setBooks] = useState([]);
   const [posts, setPosts] = useState([]);
-  const [reader, setReader] = useState()
+  const [reader, setReader] = useState();
+
   useEffect(() => {
-    SecureStore.getItemAsync("email").then(email => {
-      readerService.getReaderByEmail(email).then(res => {
-        postService.getUserFollowsPost(res.data.data.userId).then(response => {
-          if(response.data.success) {
-            setPosts(response.data.data)
-            setReader(res.data.data)
-          }
-        })
-        SecureStore.setItemAsync("readerId", res.data.data.userId)
-      })
-    })
-  }, [isFocused])
+    SecureStore.getItemAsync("email").then((email) => {
+      readerService.getReaderByEmail(email).then((res) => {
+        postService
+          .getUserFollowsPost(res.data.data.userId, 0, 5)
+          .then((response) => {
+            if (response.data.success) {
+              setPosts(response.data.data);
+              setReader(res.data.data);
+            }
+          });
+        SecureStore.setItemAsync("readerId", res.data.data.userId);
+      });
+    });
+  }, [isFocused]);
 
   const searchBook = (text) => {
-    setTitle(text)
+    setTitle(text);
     if (text.trim().length > 0) {
       bookService
         .search(text)
         .then((res) => setBooks(res.data.data))
         .catch((error) => console.log(error));
-    }
-    else setBooks([]);
+    } else setBooks([]);
   };
+  
   return (
     <SafeAreaView className="bg-[#E07A5F]">
       <View className="p-10 relative">
         <View className="absolute top-12 pl-12 z-10">
-          <MagnifyingGlassIcon size={20} className="text-gray-50"/>
+          <MagnifyingGlassIcon size={20} className="text-gray-50" />
         </View>
         <TextInput
           className="rounded-xl p-2 px-8 w-full bg-white shadow-xl"
@@ -58,17 +61,18 @@ const HomeScreen = () => {
         />
       </View>
       {books?.length > 0 && (
-        <View className="bg-white">
+        <ScrollView className="bg-white h-screen">
           {books.map((book) => (
-           <SearchedBook key={book.bookId} book={book} />
+            <SearchedBook key={book.bookId} book={book} />
           ))}
-        </View>
+        </ScrollView>
       )}
 
       {/* Posts */}
-      <ScrollView className="bg-gray-100  mb-28">
-        <Posts posts={posts} reader={reader} />
-      </ScrollView>
+      {posts?.length > 0 && (
+        <Posts postsData={posts} reader={reader} />
+      )}
+    
       <StatusBar style="light" />
     </SafeAreaView>
   );

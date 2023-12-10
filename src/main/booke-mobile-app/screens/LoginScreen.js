@@ -11,9 +11,11 @@ import AuthService from "../services/AuthService";
 import { useNavigation } from "@react-navigation/native";
 import * as SecureStore from 'expo-secure-store';
 import { Controller, useForm } from "react-hook-form";
+import ReaderService from "../services/ReaderService";
 
 const LoginScreen = () => {
   const authService = new AuthService();
+  const readerService = new ReaderService();
   const navigation = useNavigation();
 
   const {control, handleSubmit} = useForm();
@@ -27,7 +29,15 @@ const LoginScreen = () => {
         .then((res) => {
           if (res.data.success) {
             setUserCredentials(res.data.data);
-            navigation.navigate("Home");
+            navigation.navigate("TabNavigation")
+            // readerService.getReaderByEmail(res.data.data.email).then(response => {
+            //   if(response.data.success) {
+            //     console.log(response.data.data)
+            //     SecureStore.setItemAsync("readerId", response.data.data.userId).then(res => 
+                  
+            //     )
+            //   }
+            // })
           }
         })
         .catch((error) => console.log(error));
@@ -70,6 +80,7 @@ const LoginScreen = () => {
                     onChangeText={onChange}
                     onBlur={onBlur}
                     keyboardType="email-address"
+                    autoCapitalize="none"
                     value={value}
                     placeholder="email@example.com"
                   ></TextInput>
