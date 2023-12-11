@@ -58,8 +58,8 @@ const PostDetail = ({ post, reader, navigation }) => {
           source={{ uri: post?.bookImageUrl }}
           className="w-24 h-40 rounded-md"
         />
-        <View className="mt-2">
-          <Text className="text-lg font-semibold">{post?.bookName}</Text>
+        <View className="mt-2 pr-2">
+          <Text className="text-lg font-semibold mr-10">{post?.bookName}</Text>
           <Text className="text-base">{post?.authorName}</Text>
           <View className="flex-row items-center space-x-1 mt-2">
             <StarIcon size={20} color="#E07A5F" />
@@ -67,7 +67,7 @@ const PostDetail = ({ post, reader, navigation }) => {
           </View>
           <View className="my-3 w-52 border border-gray-500/20" />
 
-          <View className="flex-row space-x-8 justify-center items-center mt-2">
+          <View className="flex-row space-x-4 justify-center items-center mt-2 mr-8">
             <View>
               <TouchableOpacity className="flex-row items-center space-x-1">
                 {postIsLiked &&

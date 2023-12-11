@@ -12,6 +12,7 @@ const Posts = ({ postsData, reader }) => {
   const [pageNo, setPageNo] = useState(0);
   const [pageSize, setPageSize] = useState(5);
   const [stopGetData, setStopGetData] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   const getUserFollowsPost = () => {
     if (!stopGetData)
@@ -34,11 +35,26 @@ const Posts = ({ postsData, reader }) => {
         });
   };
 
+  const handleRefresh = () => {
+    setStopGetData(false);
+    setIsRefreshing(true);
+    postService.getUserFollowsPost(reader?.userId, 0, 5).then((response) => {
+      if (response.data.success) {
+        setPosts(response.data.data);
+        setPageNo(0);
+        setPageSize(5);
+        setIsRefreshing(false);
+      }
+    });
+  };
+
   return (
     <FlatList
-      className="bg-gray-100  mb-28"
+      className="bg-gray-100 mb-28"
       data={posts.length > 0 ? posts : postsData}
       keyExtractor={(item) => item.postId}
+      onRefresh={handleRefresh}
+      refreshing={isRefreshing}
       renderItem={({ item, index }) => (
         <View className="bg-white">
           <PostDetail

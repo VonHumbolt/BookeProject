@@ -23,7 +23,7 @@ const BookScreen = ({ route, navigation }) => {
                 source={{ uri: book.bookImage.imageUrl }}
                 className="w-24 h-40 rounded-md"
               />
-              <View className="flex mt-5 mx-8">
+              <View className="flex mt-5 mx-8 w-60">
                 <Text className="text-xl font-semibold">{book.title}</Text>
                 <Text className="text-base font-medium mb-4">
                   {book.author?.fullName}

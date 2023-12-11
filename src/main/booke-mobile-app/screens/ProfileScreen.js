@@ -22,7 +22,6 @@ const ProfileScreen = () => {
   const navigation = useNavigation();
   const readerService = new ReaderService();
   const [reader, setReader] = useState();
-  const [isRefresh, setIsRefresh] = useState(false);
 
   useEffect(() => {
     SecureStore.getItemAsync("email").then((email) => {
@@ -31,10 +30,6 @@ const ProfileScreen = () => {
       });
     });
   }, [isFocused]);
-
-  const refresh = () => {
-    setIsRefresh(!isRefresh);
-  };
 
   return (
     <SafeAreaView className="bg-[#E07A5F] flex-1">

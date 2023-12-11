@@ -88,6 +88,9 @@ const DiscoverScreen = ({ navigation }) => {
                     <ScrollView
                       horizontal
                       className="bg-white py-3 px-6 space-x-6"
+                      contentContainerStyle={{
+                        paddingRight: 32,
+                      }}
                     >
                       {genre.books.map((book) => (
                         <TouchableOpacity

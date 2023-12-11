@@ -70,7 +70,7 @@ const CommentScreen = ({ route }) => {
     <KeyboardAvoidingView
       className="flex-1"
       behavior={Platform.OS === "ios" ? "padding" : "height"}
-      keyboardVerticalOffset={100}
+      keyboardVerticalOffset={80}
     >
       <View className="py-5 px-6 border-b border-[#3D405B]/20 bg-white shadow-md">
         <Text className="text-xs text-right text-gray-500">
@@ -96,8 +96,8 @@ const CommentScreen = ({ route }) => {
             source={{ uri: post?.bookImageUrl }}
             className="w-24 h-40 rounded-md"
           />
-          <View className="mt-2">
-            <Text className="text-lg font-semibold">{post?.bookName}</Text>
+          <View className="mt-2 pr-3">
+            <Text className="text-lg font-semibold mr-10">{post?.bookName}</Text>
             <Text className="text-base">{post?.authorName}</Text>
             <View className="flex-row items-center space-x-1 mt-2">
               <StarIcon size={20} color="#E07A5F" />
@@ -105,7 +105,7 @@ const CommentScreen = ({ route }) => {
             </View>
             <View className="my-3 w-52 border border-gray-500/20" />
 
-            <View className="flex-row space-x-8 justify-center mt-2 items-center">
+            <View className="flex-row space-x-4 justify-center mt-2 items-center mr-8">
               <View>
                 <TouchableOpacity
                   className="flex-row items-center space-x-1"
@@ -133,7 +133,7 @@ const CommentScreen = ({ route }) => {
         </View>
       </View>
       {/* Comments */}
-      <ScrollView className="pt-4 bg-white">
+      <ScrollView className="pt-4 mb-3">
         {comments.length == 0 ? (
           <View>
             <Text className="text-lg text-center text-gray-500">
@@ -145,7 +145,7 @@ const CommentScreen = ({ route }) => {
           </View>
         ) : (
           comments.map((comment) => (
-            <View key={comment?.commentId} className="px-5 py-3 ">
+            <View key={comment?.commentId} className="px-5 py-3">
               {/* User and star */}
               <View className="flex-row items-center justify-between">
                 <Text className="text-[#3D405B] font-semibold">
@@ -165,24 +165,16 @@ const CommentScreen = ({ route }) => {
           ))
         )}
       </ScrollView>
-      <View className="absolute bottom-10 left-4 z-20 w-96">
-        <View className="flex-row space-x-1">
-          <ScrollView
-            automaticallyAdjustKeyboardInsets
-          >
-            <KeyboardAvoidingView
-              behavior="position"
-              keyboardVerticalOffset={100}
-            >
+      <View className="flex-row items-center space-x-1 px-4 mb-8">
+          <View className="flex-1">
               <TextInput
-                className="px-2 py-1 text-base border flex-1 rounded-lg"
+                className="px-2 text-base border flex-1 rounded-lg"
                 placeholder="Write Comment"
                 value={message}
                 autoFocus={true}
                 onChangeText={(text) => setMessage(text)}
               />
-            </KeyboardAvoidingView>
-          </ScrollView>
+          </View>
           <TouchableOpacity
             className="bg-[#81B29A] p-2 rounded-md"
             onPress={() => addComment()}
@@ -190,7 +182,6 @@ const CommentScreen = ({ route }) => {
             <Text className="text-white font-semibold">Comment</Text>
           </TouchableOpacity>
         </View>
-      </View>
     </KeyboardAvoidingView>
   );
 };

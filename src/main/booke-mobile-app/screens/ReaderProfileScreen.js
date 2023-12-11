@@ -8,7 +8,6 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { UserGroupIcon, UsersIcon } from "react-native-heroicons/solid";
 import CurrentlyReading from "../components/CurrentlyReading";
 import CurrentStats from "../components/CurrentStats";
 import WantToRead from "../components/WantToRead";
@@ -63,8 +62,8 @@ const ReaderProfileScreen = ({ route, navigation }) => {
   };
 
   return (
-    <SafeAreaView className="bg-[#E07A5F]">
-      <View className="pt-6 pb-2 px-8 bg-[#E07A5F] flex-row items-center">
+    <SafeAreaView className="bg-[#E07A5F] mb-40">
+      <View className="py-6 px-8 flex-row items-center">
         <Image
           source={{ uri: reader?.profileImage.imageUrl }}
           className="w-24 h-24 rounded-full"

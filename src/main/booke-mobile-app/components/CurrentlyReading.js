@@ -68,7 +68,7 @@ const CurrentlyReading = ({
               className="w-24 h-40 my-auto mx-10 rounded-md"
             />
             <View className={`flex ${isUserProfile ? "mt-0" : "mt-5"}`}>
-              <Text className="text-white font-bold text-lg">{book.title}</Text>
+              <Text className="text-white font-bold text-lg w-60">{book.title}</Text>
               <Text className="text-white font-semibold text-base">
                 {book.author.fullName}
               </Text>
@@ -79,7 +79,7 @@ const CurrentlyReading = ({
                 </Text>
               </View>
               {isUserProfile && (
-                <View className="mt-4 mx-auto">
+                <View className="mt-4">
                   <SelectDropdown
                     data={options}
                     defaultButtonText={"Currently Reading"}

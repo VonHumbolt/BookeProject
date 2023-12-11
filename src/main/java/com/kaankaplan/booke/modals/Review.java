@@ -35,7 +35,6 @@ public class Review {
 
     public Review() {  this.publishedDate = new Date(); }
 
-    // get published date metodu olmadğından servis sonrası dönen verilerin içerisinde publishedDAte alanı olur mu?
     public String getReviewId() {
         return reviewId;
     }

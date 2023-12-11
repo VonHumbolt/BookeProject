@@ -16,12 +16,14 @@ import ReaderService from "../services/ReaderService";
 const ReadingChallenge = ({ challenges, userId, navigation }) => {
   const readerService = new ReaderService();
   const [isOpen, setIsOpen] = useState(false);
-  const [target, setTarget] = useState(0);
+  const [target, setTarget] = useState();
 
   const startChallenge = () => {
     if (target > 0) {
       readerService.startReadingChallenge(userId, target).then((res) => {
-        if (res.data.success) setIsOpen(false);
+        if (res.data.success) {
+          setIsOpen(false);
+        }
       });
     }
   };
@@ -33,6 +35,7 @@ const ReadingChallenge = ({ challenges, userId, navigation }) => {
       {challenges?.length > 0 ? (
         challenges?.map((challenge) => (
           <TouchableOpacity
+            key={challenge?.challengeId}
             className="px-6 pt-3 pb-1 bg-white flex-row"
             onPress={() =>
               navigation.navigate("Book", {
@@ -70,10 +73,6 @@ const ReadingChallenge = ({ challenges, userId, navigation }) => {
                 />
                 <Text className="font-extrabold text-[#81B29A]">{`${challenge?.read}/${challenge?.target}`}</Text>
               </View>
-              {/* <TouchableOpacity className="mt-6 flex-row justify-end">
-              <Text className="text-[#3D405B] underline">See All Books</Text>
-              <ChevronRightIcon size={16} color={"#3D405B"} />
-              </TouchableOpacity> */}
               <View className="mt-4 w-full border border-[#DADADA]" />
               <View className="flex-row px-6 mt-4 items-center space-x-4">
                 <Text className="text-base text-[#3D405B] font-semibold">

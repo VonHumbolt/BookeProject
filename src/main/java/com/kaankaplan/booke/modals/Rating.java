@@ -5,7 +5,6 @@ import lombok.ToString;
 @ToString
 public class Rating {
 
-    private String ratingId;
     public int oneStarCount;
     public int twoStarCount;
     public int threeStarCount;
@@ -24,7 +23,4 @@ public class Rating {
         this.meanOfRating = 0;
     }
 
-    public String getRatingId() {
-        return ratingId;
-    }
 }
