@@ -167,13 +167,22 @@ const CommentScreen = ({ route }) => {
       </ScrollView>
       <View className="absolute bottom-10 left-4 z-20 w-96">
         <View className="flex-row space-x-1">
-          <TextInput
-            className="px-2 py-1 text-base border flex-1 rounded-lg"
-            placeholder="Write Comment"
-            value={message}
-            autoFocus={true}
-            onChangeText={(text) => setMessage(text)}
-          />
+          <ScrollView
+            automaticallyAdjustKeyboardInsets
+          >
+            <KeyboardAvoidingView
+              behavior="position"
+              keyboardVerticalOffset={100}
+            >
+              <TextInput
+                className="px-2 py-1 text-base border flex-1 rounded-lg"
+                placeholder="Write Comment"
+                value={message}
+                autoFocus={true}
+                onChangeText={(text) => setMessage(text)}
+              />
+            </KeyboardAvoidingView>
+          </ScrollView>
           <TouchableOpacity
             className="bg-[#81B29A] p-2 rounded-md"
             onPress={() => addComment()}

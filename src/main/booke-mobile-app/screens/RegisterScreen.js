@@ -4,6 +4,8 @@ import {
   SafeAreaView,
   TextInput,
   TouchableOpacity,
+  ScrollView,
+  KeyboardAvoidingView,
 } from "react-native";
 import React from "react";
 import { StatusBar } from "expo-status-bar";
@@ -29,6 +31,7 @@ const RegisterScreen = () => {
   };
   return (
     <SafeAreaView className="flex-1 bg-[#E07A5F]">
+      <ScrollView automaticallyAdjustKeyboardInsets>
       <View className="p-20 mt-10">
         <View className="flex-row space-x-4">
           <TouchableOpacity className="p-1" onPress={() => navigation.goBack()}>
@@ -56,7 +59,7 @@ const RegisterScreen = () => {
                 field: { value, onChange, onBlur },
                 fieldState: { error },
               }) => (
-                <>
+                <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={100} >
                   <TextInput
                     className="rounded-lg p-2 w-full bg-white shadow-lg"
                     onChangeText={onChange}
@@ -69,7 +72,7 @@ const RegisterScreen = () => {
                       {error.message}
                     </Text>
                   )}
-                </>
+                </KeyboardAvoidingView>
               )}
             />
             <Text className="text-white font-medium pt-3 pb-2">Email</Text>
@@ -81,7 +84,7 @@ const RegisterScreen = () => {
                 field: { value, onChange, onBlur },
                 fieldState: { error },
               }) => (
-                <>
+                <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={100} >
                   <TextInput
                     className="rounded-lg p-2 w-full bg-white shadow-lg"
                     onChangeText={onChange}
@@ -96,7 +99,7 @@ const RegisterScreen = () => {
                       {error.message}
                     </Text>
                   )}
-                </>
+                </KeyboardAvoidingView>
               )}
             />
           <Text className="text-white font-medium pt-3 pb-2">Password</Text>
@@ -108,7 +111,7 @@ const RegisterScreen = () => {
                 field: { value, onChange, onBlur },
                 fieldState: { error },
               }) => (
-                <>
+                <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={100} >
                   <TextInput
                     className="rounded-lg p-2 w-full bg-white shadow-lg"
                     onChangeText={onChange}
@@ -122,7 +125,7 @@ const RegisterScreen = () => {
                       {error.message}
                     </Text>
                   )}
-                </>
+                </KeyboardAvoidingView>
               )}
             />
             <TouchableOpacity className="flex items-center" onPress={handleSubmit(onSubmit)}>
@@ -135,8 +138,8 @@ const RegisterScreen = () => {
           </View>
         </View>
       </View>
-
-      <StatusBar style="auto" />
+      </ScrollView>
+      <StatusBar style="light" />
     </SafeAreaView>
   );
 };

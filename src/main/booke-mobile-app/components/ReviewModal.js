@@ -50,12 +50,11 @@ const ReviewModal = ({ route, navigation }) => {
   };
 
   return (
-    <KeyboardAvoidingView
-      className="flex-1"
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      keyboardVerticalOffset={100}
-    >
-      <ScrollView className="flex-1 p-5 bg-white">
+    <View className="flex-1">
+      <ScrollView
+        className="flex-1 p-5 bg-white"
+        automaticallyAdjustKeyboardInsets
+      >
         <Text className="mt-6 text-3xl font-bold text-[#E07A5F] text-center">
           Congratulations!
         </Text>
@@ -142,14 +141,19 @@ const ReviewModal = ({ route, navigation }) => {
           <Text className="text-lg text-center font-semibold">
             Write Review
           </Text>
-          <TextInput
-            className="w-full mt-3 px-2 rounded-lg h-36 bg-gray-200"
-            multiline={true}
-            numberOfLines={22}
-            value={reviewText}
-            onChangeText={(text) => setReviewText(text)}
-            placeholder="Your thinks about book"
-          />
+          <KeyboardAvoidingView
+            behavior={"position"}
+            keyboardVerticalOffset={100}
+          >
+            <TextInput
+              className="w-full mt-3 px-2 rounded-lg h-36 bg-gray-200"
+              multiline={true}
+              numberOfLines={22}
+              value={reviewText}
+              onChangeText={(text) => setReviewText(text)}
+              placeholder="Your thinks about book"
+            />
+          </KeyboardAvoidingView>
           <TouchableOpacity
             className="bg-[#81B29A] mx-auto px-8 py-2 rounded-lg mt-4 active:bg-[#E07A5F]"
             onPress={() => submitReview()}
@@ -159,7 +163,7 @@ const ReviewModal = ({ route, navigation }) => {
         </View>
       </ScrollView>
       <StatusBar style="light" />
-    </KeyboardAvoidingView>
+    </View>
   );
 };
 

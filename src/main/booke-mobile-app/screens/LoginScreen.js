@@ -4,6 +4,8 @@ import {
   SafeAreaView,
   TextInput,
   TouchableOpacity,
+  KeyboardAvoidingView,
+  ScrollView,
 } from "react-native";
 import React from "react";
 import { StatusBar } from "expo-status-bar";
@@ -11,11 +13,9 @@ import AuthService from "../services/AuthService";
 import { useNavigation } from "@react-navigation/native";
 import * as SecureStore from 'expo-secure-store';
 import { Controller, useForm } from "react-hook-form";
-import ReaderService from "../services/ReaderService";
 
 const LoginScreen = () => {
   const authService = new AuthService();
-  const readerService = new ReaderService();
   const navigation = useNavigation();
 
   const {control, handleSubmit} = useForm();
@@ -30,14 +30,6 @@ const LoginScreen = () => {
           if (res.data.success) {
             setUserCredentials(res.data.data);
             navigation.navigate("TabNavigation")
-            // readerService.getReaderByEmail(res.data.data.email).then(response => {
-            //   if(response.data.success) {
-            //     console.log(response.data.data)
-            //     SecureStore.setItemAsync("readerId", response.data.data.userId).then(res => 
-                  
-            //     )
-            //   }
-            // })
           }
         })
         .catch((error) => console.log(error));
@@ -52,6 +44,7 @@ const LoginScreen = () => {
 
   return (
     <SafeAreaView className="flex-1 bg-[#E07A5F]">
+      <ScrollView automaticallyAdjustKeyboardInsets>
       <View className="p-20 mt-10">
         <View className="flex-row space-x-4">
           <View className="p-1 border-b-4 border-[#3D405B]">
@@ -74,7 +67,7 @@ const LoginScreen = () => {
               name="email"
               rules={{required: "Email is required!"}}
               render={({field: {value, onChange, onBlur}, fieldState: {error}}) => (
-                <>
+                <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={100} >
                   <TextInput
                     className="rounded-lg p-2 w-full bg-white shadow-lg"
                     onChangeText={onChange}
@@ -85,7 +78,7 @@ const LoginScreen = () => {
                     placeholder="email@example.com"
                   ></TextInput>
                   {error && <Text className="text-[#3D405B] pt-1 px-1 font-semibold">{error.message}</Text>}
-                </>
+                </KeyboardAvoidingView>
               )}
             />
 
@@ -95,7 +88,7 @@ const LoginScreen = () => {
               name="password"
               rules={{required: "Password is required!"}}
               render={({field: {value, onChange, onBlur}, fieldState: {error}}) => (
-                <>
+                <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={100} >
                   <TextInput
                     className="rounded-lg p-2 w-full bg-white shadow-lg"
                     secureTextEntry={true}
@@ -105,7 +98,7 @@ const LoginScreen = () => {
                     placeholder="*******"
                   ></TextInput>
                   {error && <Text className="text-[#3D405B] pt-1 px-1 font-semibold">{error.message}</Text>}
-                </>
+                </KeyboardAvoidingView>
               )}
             />
             <View className="w-full justify-end flex-row">
@@ -123,8 +116,8 @@ const LoginScreen = () => {
           </View>
         </View>
       </View>
-
-      <StatusBar style="auto" />
+      </ScrollView>
+      <StatusBar style="light" />
     </SafeAreaView>
   );
 };
