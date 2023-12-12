@@ -10,7 +10,6 @@ const CurrentlyReading = ({
   books,
   reader,
   isUserProfile,
-  refresh,
   navigation,
 }) => {
   const readerService = new ReaderService();
@@ -22,7 +21,6 @@ const CurrentlyReading = ({
       readerService
         .addBookIntoWantToReads(reader.userId, book.bookId)
         .then((res) => {
-          refresh();
         });
     }
     

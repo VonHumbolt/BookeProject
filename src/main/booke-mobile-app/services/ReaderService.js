@@ -45,7 +45,6 @@ export default class ReaderService {
     }
 
     searchReader(name) {
-        console.log(this.apiUrl + "search/" + name)
         return this.axiosInstance.get(this.apiUrl + "search/" + name);
     }
 
@@ -55,5 +54,13 @@ export default class ReaderService {
 
     unfollow(userId, wantToUnfollowUserId) {
         return this.axiosInstance.post(this.apiUrl + "unfollow/" + userId + "/" + wantToUnfollowUserId, {});
+    }
+
+    updateProfileImage(userId, formData) {
+        return this.axiosInstance.post(this.apiUrl + "updateProfileImage/" + userId, formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            }
+        })
     }
 }

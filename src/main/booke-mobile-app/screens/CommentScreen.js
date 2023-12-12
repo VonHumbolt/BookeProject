@@ -77,12 +77,12 @@ const CommentScreen = ({ route }) => {
           {convertDate(post?.publishedDate)}
         </Text>
         <View className="flex-row items-center">
-          <View className="border-2 border-[#C44536] w-12 h-12 rounded-full p-1">
+          {/* <View className="border-2 border-[#C44536] w-12 h-12 rounded-full p-1"> */}
             <Image
               source={{ uri: post?.profilePictureUrl }}
               className="w-9 h-9 rounded-full"
             />
-          </View>
+          {/* </View> */}
           <View className="flex-row items-center space-x-2 px-3 ">
             <Text className="text-base font-medium">
               {post?.fullName}{" "}

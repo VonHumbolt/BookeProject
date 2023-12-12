@@ -33,18 +33,18 @@ const PostDetail = ({ post, reader, navigation }) => {
     });
   };
   return (
-    <View className="py-5 px-6 border-b border-[#3D405B]/20">
+    <View className="py-5 px-6 border-b border-[#3D405B]/10">
       {/* <View className="absolute left-5 top-4 z-20 border-2 border-[#C44536] rounded-full h-[48px] w-[48px]" /> */}
       <Text className="text-xs text-right text-gray-500">
         {convertDate(post?.publishedDate)}
       </Text>
       <View className="flex-row items-center">
-        <View className="border-2 border-[#C44536] w-12 h-12 rounded-full p-1">
+        {/* <View className="border border-[#C44536] w-12 h-12 rounded-full p-[5px]"> */}
           <Image
             source={{ uri: post?.profilePictureUrl }}
             className="w-9 h-9 rounded-full"
           />
-        </View>
+        {/* </View> */}
         <View className="flex-1 px-3">
           <Text className="text-base font-medium">
             {post?.fullName}{" "}
@@ -53,13 +53,13 @@ const PostDetail = ({ post, reader, navigation }) => {
           </Text>
         </View>
       </View>
-      <View className="flex-row mt-4 px-6 space-x-6">
+      <View className="flex-row mt-4 px-4 space-x-6 ">
         <Image
           source={{ uri: post?.bookImageUrl }}
           className="w-24 h-40 rounded-md"
         />
         <View className="mt-2 pr-2">
-          <Text className="text-lg font-semibold mr-10">{post?.bookName}</Text>
+          <Text className="text-lg font-semibold w-60">{post?.bookName}</Text>
           <Text className="text-base">{post?.authorName}</Text>
           <View className="flex-row items-center space-x-1 mt-2">
             <StarIcon size={20} color="#E07A5F" />
