@@ -12,6 +12,7 @@ import ReaderProfileScreen from "./screens/ReaderProfileScreen";
 import FriendsScreen from "./screens/FriendsScreen";
 import BookScreen from "./screens/BookScreen";
 import CommentScreen from "./screens/CommentScreen";
+import StartChallengeModal from "./components/StartChallengeModal";
 
 const Stack = createNativeStackNavigator();
 
@@ -68,6 +69,14 @@ export default function App() {
           }}
           name="Review"
           component={ReviewModal}
+        />
+        <Stack.Screen
+          options={{
+            headerShown: false,
+            presentation: "transparentModal",
+          }}
+          name="StartChallenge"
+          component={StartChallengeModal}
         />
         <Stack.Screen
           options={{

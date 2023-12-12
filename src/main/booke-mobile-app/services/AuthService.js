@@ -11,4 +11,8 @@ export default class AuthService {
     register(credentials) {
         return axios.post(this.apiUrl + "register", credentials);
     }
+
+    logout(refreshRequestDto) {
+        return axios.post(this.apiUrl + "logout", refreshRequestDto);
+    }
 }

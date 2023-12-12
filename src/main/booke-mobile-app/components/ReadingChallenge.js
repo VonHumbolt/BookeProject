@@ -3,30 +3,12 @@ import {
   Text,
   Image,
   TouchableOpacity,
-  Modal,
-  TextInput,
-  ScrollView,
-  KeyboardAvoidingView,
 } from "react-native";
-import React, { useState } from "react";
+import React from "react";
 import ProgressBar from "react-native-progress/Bar";
-import { PlusCircleIcon, XCircleIcon } from "react-native-heroicons/solid";
-import ReaderService from "../services/ReaderService";
+import { PlusCircleIcon } from "react-native-heroicons/solid";
 
 const ReadingChallenge = ({ challenges, userId, navigation }) => {
-  const readerService = new ReaderService();
-  const [isOpen, setIsOpen] = useState(false);
-  const [target, setTarget] = useState();
-
-  const startChallenge = () => {
-    if (target > 0) {
-      readerService.startReadingChallenge(userId, target).then((res) => {
-        if (res.data.success) {
-          setIsOpen(false);
-        }
-      });
-    }
-  };
   return (
     <View className="my-6">
       <Text className="mx-6 mb-2 text-lg font-semibold text-[#3D405B]">
@@ -97,62 +79,11 @@ const ReadingChallenge = ({ challenges, userId, navigation }) => {
           <Text className="text-[#3D405B] text-base font-bold">
             New Reading Challenge
           </Text>
-          <TouchableOpacity onPress={() => setIsOpen(true)}>
+          <TouchableOpacity onPress={() => navigation.navigate("StartChallenge", {userId: userId})}> 
             <PlusCircleIcon size={40} color="#81B29A" />
           </TouchableOpacity>
         </View>
       )}
-
-      <Modal visible={isOpen} transparent={true}>
-        <View className="flex-1 items-center justify-end bg-transparent">
-          <ScrollView
-            contentContainerStyle={{
-              alignItems: "center",
-              flex: 1,
-              justifyContent: "flex-end",
-            }}
-            automaticallyAdjustKeyboardInsets
-          >
-            <View className="bg-white p-8 w-screen h-1/2 rounded-3xl items-center">
-              <TouchableOpacity
-                className="absolute top-2 right-5"
-                onPress={() => setIsOpen(false)}
-              >
-                <XCircleIcon size={40} color={"#E07A5F"} />
-              </TouchableOpacity>
-              <Text className="font-bold text-2xl text-[#3D405B]">Start</Text>
-              <Text className="font-bold text-2xl text-[#3D405B]">
-                {" "}
-                New Reading Challenge
-              </Text>
-              <View className="w-16 my-6 border border-[#E07A5F]" />
-              <Text className="font-bold text-xl text-[#3D405B]">
-                {new Date().getFullYear()} Reading Challenge
-              </Text>
-              <Text className="font-semibold text-lg text-[#3D405B] mt-2 px-6 text-center">
-                How many books is your target to read?
-              </Text>
-              <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={100}>
-              <TextInput
-                className="mt-2 border border-[#3D405B]/50 w-24 rounded-lg
-             text-[#3D405B] pb-2 text-xl text-center"
-                keyboardType="number-pad"
-                value={target}
-                onChangeText={(text) => setTarget(text)}
-              />
-              </KeyboardAvoidingView>
-              <TouchableOpacity
-                className="bg-[#81B29A] mx-auto px-6 py-2 rounded-lg mt-6"
-                onPress={() => startChallenge()}
-              >
-                <Text className="font-bold text-white text-base">
-                  Start Challenge
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </ScrollView>
-        </View>
-      </Modal>
     </View>
   );
 };

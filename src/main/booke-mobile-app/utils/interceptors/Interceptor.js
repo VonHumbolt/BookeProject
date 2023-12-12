@@ -19,7 +19,7 @@ export default class Interceptor {
         // Request
         this.axiosInstance.interceptors.request.use( async (request) => {
             console.log("Request url --> " + request.url)
-            if (this.token != null && request.url != "auth/refreshToken") {
+            if (this.token != null && request.url != "auth/refreshToken" && request.url != "auth/logout") {
                 request.headers = {
                     ...request.headers,
                     Authorization: `Bearer ${this.token}`

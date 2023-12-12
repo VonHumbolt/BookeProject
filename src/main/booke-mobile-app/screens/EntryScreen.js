@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, Image } from 'react-native'
+import { View, SafeAreaView, Image } from 'react-native'
 import React, { useEffect } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import * as SecureStore from 'expo-secure-store';
@@ -15,11 +15,6 @@ const EntryScreen = () => {
           navigation.navigate("Login")
       })
     }, 2000)
-    // SecureStore.deleteItemAsync("token");
-    // SecureStore.deleteItemAsync("refreshToken");
-    // SecureStore.deleteItemAsync("email");
-    // SecureStore.deleteItemAsync("userId");
-    // SecureStore.deleteItemAsync("readerId");
   }, [])
   
   return (

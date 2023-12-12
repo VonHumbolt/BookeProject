@@ -16,14 +16,20 @@ import ReadingChallenge from "../components/ReadingChallenge";
 import ReaderService from "../services/ReaderService";
 import * as SecureStore from "expo-secure-store";
 import { useIsFocused, useNavigation } from "@react-navigation/native";
-import * as ImagePicker from 'expo-image-picker';
-import * as ImageManipulator from 'expo-image-manipulator';
+import * as ImagePicker from "expo-image-picker";
+import * as ImageManipulator from "expo-image-manipulator";
+import { Cog6ToothIcon } from "react-native-heroicons/outline";
+import { Cog6ToothIcon as Cog6ToothIconSolid } from "react-native-heroicons/solid";
+import AuthService from "../services/AuthService";
 
 const ProfileScreen = () => {
   const isFocused = useIsFocused();
   const navigation = useNavigation();
   const readerService = new ReaderService();
+  const authService = new AuthService();
+
   const [reader, setReader] = useState();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [image, setImage] = useState(null);
 
   useEffect(() => {
@@ -39,43 +45,83 @@ const ProfileScreen = () => {
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       aspect: [4, 3],
-      quality: 1      
+      quality: 1,
     });
 
-    console.log(result);
-  
     if (!result.canceled) {
-      uploadImage(result)
+      uploadImage(result);
     }
-
   };
 
   const uploadImage = async (imageResult) => {
     const image = await resizeImage(imageResult.assets[0]);
-    const filename = image.uri.split('/').pop();
+    const filename = image.uri.split("/").pop();
     const match = /\.(\w+)$/.exec(filename);
     const type = match ? `image/${match[1]}` : `image`;
 
     const formData = new FormData();
-    formData.append("image",  { uri: image.uri, name: filename, type });
-    readerService.updateProfileImage(reader?.userId, formData).then(res => {
-      if(res.data.success)
-        setImage(image.uri)
-    })
-  }
+    formData.append("image", { uri: image.uri, name: filename, type });
+    readerService.updateProfileImage(reader?.userId, formData).then((res) => {
+      if (res.data.success) setImage(image.uri);
+    });
+  };
 
   const resizeImage = async (image) => {
-    const width = image.width
-    const height = image.height
+    const width = image.width;
+    const height = image.height;
     const ratio = width / height;
-    const resizedImage = await ImageManipulator.manipulateAsync(image.uri, [{ resize: { width: 640, height: 640 / ratio } }], { compress: 0.5 });
+    const resizedImage = await ImageManipulator.manipulateAsync(
+      image.uri,
+      [{ resize: { width: 640, height: 640 / ratio } }],
+      { compress: 0.5 }
+    );
     return resizedImage;
-  }
+  };
+
+  const logout = () => {
+    SecureStore.getItemAsync("refreshToken").then((token) => {
+      const refreshRequestDto = {
+        email: reader?.email,
+        refreshToken: token,
+      };
+      authService.logout(refreshRequestDto).then((res) => {
+        if (res.data.success) {
+          SecureStore.deleteItemAsync("token");
+          SecureStore.deleteItemAsync("refreshToken");
+          SecureStore.deleteItemAsync("email");
+          SecureStore.deleteItemAsync("userId");
+          SecureStore.deleteItemAsync("readerId");
+          setIsMenuOpen(false)
+          navigation.navigate("Login");
+        }
+      });
+    });
+  };
 
   return (
     <SafeAreaView className="bg-[#E07A5F] flex-1">
-      <View className="py-6 px-8 flex-row items-center">
-          <View className="absolute left-[25px] border-2 border-[#C44536] rounded-full h-[110px] w-[110px]" />
+      <View className="py-6 pr-8 pl-8 flex-row items-center">
+        <TouchableOpacity
+          className="absolute top-4 right-5"
+          onPress={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          {isMenuOpen ? (
+            <Cog6ToothIconSolid size={30} color="white" />
+          ) : (
+            <Cog6ToothIcon size={30} color="white" />
+          )}
+        </TouchableOpacity>
+        {isMenuOpen && (
+          <TouchableOpacity
+            className="absolute bg-white top-12 right-4 z-20 px-5 py-4 rounded-md"
+            onPress={logout}
+          >
+            <Text className="font-semibold text-base text-[#3D405B]">
+              Logout
+            </Text>
+          </TouchableOpacity>
+        )}
+        <View className="absolute left-[25px] border-2 border-[#C44536] rounded-full h-[110px] w-[110px]" />
         <TouchableOpacity onPress={pickImage}>
           <Image
             source={{ uri: image ? image : reader?.profileImage.imageUrl }}
@@ -84,8 +130,8 @@ const ProfileScreen = () => {
             height={20}
           />
         </TouchableOpacity>
-        <View className="flex-1 ">
-          <Text className="px-6 text-white text-center font-bold text-2xl">
+        <View className="flex">
+          <Text className="px-10 text-white text-center font-bold text-2xl">
             {reader?.fullName}
           </Text>
           <View className="w-full border border-[#C44536] mx-[5px] my-2" />
@@ -99,7 +145,6 @@ const ProfileScreen = () => {
                 })
               }
             >
-              {/* <UsersIcon size={20} color="white" /> */}
               <Text className="text-white text-lg font-extrabold mr-1">
                 {reader?.followsIdList?.length}
               </Text>
@@ -114,7 +159,6 @@ const ProfileScreen = () => {
                 })
               }
             >
-              {/* <UserGroupIcon size={20} color="white" /> */}
               <Text className="text-white text-lg font-extrabold mr-1">
                 {reader?.followersIdList?.length}
               </Text>
