@@ -1,6 +1,6 @@
 import { View, SafeAreaView, Image } from 'react-native'
 import React, { useEffect } from 'react'
-import { useNavigation } from '@react-navigation/native'
+import { StackActions, useNavigation } from '@react-navigation/native'
 import * as SecureStore from 'expo-secure-store';
 
 
@@ -10,9 +10,13 @@ const EntryScreen = () => {
     setTimeout(() => {
       SecureStore.getItemAsync("token").then(token => {
         if(token != null)
-          navigation.navigate("TabNavigation")
+          navigation.dispatch(
+            StackActions.replace("TabNavigation")
+          )
         else 
-          navigation.navigate("Login")
+          navigation.dispatch(
+            StackActions.replace("Login")
+          )
       })
     }, 2000)
   }, [])

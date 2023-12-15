@@ -13,7 +13,7 @@ export default class Interceptor {
         SecureStore.getItemAsync("email").then(email => this.email = email);
         this.axiosInstance = axios.create({
             // <YOUR_LOCALHOST_IP>
-            baseURL: `http://<YOUR_LOCALHOST_IP>:8080/`
+            baseURL: "http://<YOUR_LOCALHOST_IP>:8080/"
         });
 
         // Request

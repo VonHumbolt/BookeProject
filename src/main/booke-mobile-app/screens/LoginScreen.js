@@ -10,7 +10,7 @@ import {
 import React from "react";
 import { StatusBar } from "expo-status-bar";
 import AuthService from "../services/AuthService";
-import { useNavigation } from "@react-navigation/native";
+import { StackActions, useNavigation } from "@react-navigation/native";
 import * as SecureStore from 'expo-secure-store';
 import { Controller, useForm } from "react-hook-form";
 
@@ -29,7 +29,9 @@ const LoginScreen = () => {
         .then((res) => {
           if (res.data.success) {
             setUserCredentials(res.data.data);
-            navigation.navigate("TabNavigation")
+            navigation.dispatch(
+              StackActions.replace("TabNavigation")
+            )
           }
         })
         .catch((error) => console.log(error));
