@@ -4,7 +4,7 @@ import com.kaankaplan.booke.business.abstracts.RoleService;
 import com.kaankaplan.booke.business.messages.Constant;
 import com.kaankaplan.booke.core.util.results.*;
 import com.kaankaplan.booke.modals.Role;
-import com.kaankaplan.booke.business.abstracts.abstracts.RoleRepository;
+import com.kaankaplan.booke.repositories.abstracts.RoleRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

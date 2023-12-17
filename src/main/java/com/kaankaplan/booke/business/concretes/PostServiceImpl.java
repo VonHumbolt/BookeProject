@@ -9,7 +9,7 @@ import com.kaankaplan.booke.dto.PostDto;
 import com.kaankaplan.booke.modals.Comment;
 import com.kaankaplan.booke.modals.Post;
 import com.kaankaplan.booke.modals.Reader;
-import com.kaankaplan.booke.business.abstracts.abstracts.PostRepository;
+import com.kaankaplan.booke.repositories.abstracts.PostRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

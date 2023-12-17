@@ -5,7 +5,7 @@ import com.kaankaplan.booke.business.messages.Constant;
 import com.kaankaplan.booke.core.config.security.jwt.JwtService;
 import com.kaankaplan.booke.core.util.results.*;
 import com.kaankaplan.booke.modals.RefreshToken;
-import com.kaankaplan.booke.business.abstracts.abstracts.RefreshTokenRepository;
+import com.kaankaplan.booke.repositories.abstracts.RefreshTokenRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

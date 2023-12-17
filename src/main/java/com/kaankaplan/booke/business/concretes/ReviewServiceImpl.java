@@ -5,7 +5,7 @@ import com.kaankaplan.booke.core.util.results.DataResult;
 import com.kaankaplan.booke.core.util.results.ErrorDataResult;
 import com.kaankaplan.booke.core.util.results.SuccessDataResult;
 import com.kaankaplan.booke.modals.Review;
-import com.kaankaplan.booke.business.abstracts.abstracts.ReviewRepository;
+import com.kaankaplan.booke.repositories.abstracts.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

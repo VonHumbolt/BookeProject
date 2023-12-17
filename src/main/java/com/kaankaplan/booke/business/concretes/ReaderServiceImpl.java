@@ -8,7 +8,7 @@ import com.kaankaplan.booke.core.services.image.abstracts.ImageUploadService;
 import com.kaankaplan.booke.core.util.results.*;
 import com.kaankaplan.booke.dto.BookStatusDto;
 import com.kaankaplan.booke.modals.*;
-import com.kaankaplan.booke.business.abstracts.abstracts.ReaderRepository;
+import com.kaankaplan.booke.repositories.abstracts.ReaderRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

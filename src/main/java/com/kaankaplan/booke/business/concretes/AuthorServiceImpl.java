@@ -7,7 +7,7 @@ import com.kaankaplan.booke.core.util.results.ErrorDataResult;
 import com.kaankaplan.booke.core.util.results.SuccessDataResult;
 import com.kaankaplan.booke.dto.AuthorDto;
 import com.kaankaplan.booke.modals.Author;
-import com.kaankaplan.booke.business.abstracts.abstracts.AuthorRepository;
+import com.kaankaplan.booke.repositories.abstracts.AuthorRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

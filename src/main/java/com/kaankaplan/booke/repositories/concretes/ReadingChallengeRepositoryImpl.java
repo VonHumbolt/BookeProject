@@ -1,7 +1,7 @@
 package com.kaankaplan.booke.repositories.concretes;
 
 import com.kaankaplan.booke.modals.ReadingChallenge;
-import com.kaankaplan.booke.business.abstracts.abstracts.ReadingChallengeRepository;
+import com.kaankaplan.booke.repositories.abstracts.ReadingChallengeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.stereotype.Repository;

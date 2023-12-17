@@ -1,7 +1,7 @@
 package com.kaankaplan.booke.repositories.concretes;
 
 import com.kaankaplan.booke.modals.Genre;
-import com.kaankaplan.booke.business.abstracts.abstracts.GenreRepository;
+import com.kaankaplan.booke.repositories.abstracts.GenreRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.elasticsearch.client.elc.NativeQuery;

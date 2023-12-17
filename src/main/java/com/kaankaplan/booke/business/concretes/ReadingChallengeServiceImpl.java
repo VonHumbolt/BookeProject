@@ -8,7 +8,7 @@ import com.kaankaplan.booke.core.util.results.ErrorDataResult;
 import com.kaankaplan.booke.core.util.results.SuccessDataResult;
 import com.kaankaplan.booke.modals.Book;
 import com.kaankaplan.booke.modals.ReadingChallenge;
-import com.kaankaplan.booke.business.abstracts.abstracts.ReadingChallengeRepository;
+import com.kaankaplan.booke.repositories.abstracts.ReadingChallengeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

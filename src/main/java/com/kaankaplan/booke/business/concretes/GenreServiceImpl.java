@@ -7,7 +7,7 @@ import com.kaankaplan.booke.core.util.results.ErrorDataResult;
 import com.kaankaplan.booke.core.util.results.SuccessDataResult;
 import com.kaankaplan.booke.modals.Book;
 import com.kaankaplan.booke.modals.Genre;
-import com.kaankaplan.booke.business.abstracts.abstracts.GenreRepository;
+import com.kaankaplan.booke.repositories.abstracts.GenreRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;
