@@ -1,7 +1,7 @@
 package com.kaankaplan.booke.repositories.concretes;
 
 import com.kaankaplan.booke.modals.Role;
-import com.kaankaplan.booke.repositories.abstracts.RoleRepository;
+import com.kaankaplan.booke.business.abstracts.abstracts.RoleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.SearchHit;

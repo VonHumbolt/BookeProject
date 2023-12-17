@@ -1,7 +1,7 @@
 package com.kaankaplan.booke.repositories.concretes;
 
 import com.kaankaplan.booke.modals.Post;
-import com.kaankaplan.booke.repositories.abstracts.PostRepository;
+import com.kaankaplan.booke.business.abstracts.abstracts.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.stereotype.Repository;

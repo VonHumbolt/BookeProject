@@ -56,7 +56,9 @@ In this app, 2 tokens are generated: Access Token and Refresh Token.
 Refresh token was stored in Redis and the purpose of this token is to renew the access token
 when it expires. Access token is used for authorization. Redis was also used for caching genres. 
 Cloudinary was used to store book images. Kibana was used to visualize the data stored in elasticsearch.
-For working with elasticsearch, kibana and redis, docker was used.
+For working with elasticsearch, kibana and redis, docker was used. All backend 
+api requests are in postman_requests directory. If you want to use them, you can
+download this json file and import to postman.
 
 #### Mobile
 
@@ -83,7 +85,7 @@ profile picture. Tailwind CSS was used for App UI design.
 
 1. Clone or Download as zip folder of this repository
 
-        git clone https://sdfjsjfs
+        git clone https://github.com/VonHumbolt/BookeProject.git
 
 2. For adding book and profile image, go into .env file
 and replace '*****' with your cloudinary api.
@@ -102,31 +104,38 @@ and replace '*****' with your cloudinary api.
         Kibana is running on localhost:5601
         Redis is running on localhost:6379
 
-5. For the mobile app, if you haven't installed expo before, you can install expo using the following command in cmd:
+5. There is a sample postman requests json file in the postman_requests directory.
+If you want to use it, you can download this file and import it to postman.
+All the requests which I use in this project will appear on postman.
+Firstly, you must create an account and then login with it. Then, you need to use
+the token which is generated after login process for requests.
+
+
+7. For the mobile app, if you haven't installed expo before, you can install expo using the following command in cmd:
 
         npm install -g expo-cli
 
-6. Go to /src/main/booke-mobile-app path in cmd. And, run this command to create node_modules.
+8. Go to /src/main/booke-mobile-app path in cmd. And, run this command to create node_modules.
 
         npm install
 
-7. Go to Interceptor.js class located in booke-mobile-app/utils/interceptors path. 
+9. Go to Interceptor.js class located in booke-mobile-app/utils/interceptors path. 
 Then, in row 16, replace <YOUR_LOCALHOST_IP> with your wireless LAN adapter Wi-fi 
 IPv4 Address.
 
          baseURL: "http://<YOUR_LOCALHOST_IP>:8080/"
 
-8. Go to AuthService.js class located in booke-mobile-app/services path. 
+10. Go to AuthService.js class located in booke-mobile-app/services path. 
 Then, in row 5, replace <YOUR_LOCALHOST_IP> with your wireless LAN adapter Wi-fi 
 IPv4 Address.
 
-         apiUrl = "http://<YOUR_LOCALHOST_IP>:8080/auth/";
+          apiUrl = "http://<YOUR_LOCALHOST_IP>:8080/auth/";
 
-9. Start the mobile app by running the following command on the same path.
+11. Start the mobile app by running the following command on the same path.
 
-        npx expo start
+         npx expo start
 
-10. To open the mobile app in your physical device, use <strong>Expo Go</strong> app. 
+12. To open the mobile app in your physical device, use <strong>Expo Go</strong> app. 
 You can download it via the Play Store or App Store.
 
 

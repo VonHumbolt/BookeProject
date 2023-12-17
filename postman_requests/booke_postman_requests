@@ -1,0 +1,1070 @@
+{
+	"info": {
+		"_postman_id": "548b812c-804e-4f2b-b468-15b34a2565b4",
+		"name": "Booke",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14573740"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fullName\": \"Gökçe Türkel\",\r\n    \"email\": \"gokceturkel@gmail.com\",\r\n    \"password\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/auth/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"gokceturkel@gmail.com\",\r\n    \"password\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refresh",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"gokceturkel@gmail.com\",\r\n    \"refreshToken\": \"eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJnb2tjZXR1cmtlbEBnbWFpbC5jb20iLCJpYXQiOjE3MDE1MTAxMDN9.-u42PEYzWKM3bHGKGFe6UsQ5qVMxKXY1t1UnQrs4HmssrGTB7R0bclYt90sW7UnkNPGCwq4gslJjjIvNZRkJfg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/auth/refreshToken",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"refreshToken"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"gokceturkel@gmail.com\",\r\n    \"refreshToken\": \"eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJnb2tjZXR1cmtlbEBnbWFpbC5jb20iLCJpYXQiOjE3MDE1MTAxMDN9.-u42PEYzWKM3bHGKGFe6UsQ5qVMxKXY1t1UnQrs4HmssrGTB7R0bclYt90sW7UnkNPGCwq4gslJjjIvNZRkJfg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/auth/logout",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "role",
+			"item": [
+				{
+					"name": "addRole",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/role/addRole/READER",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"role",
+								"addRole",
+								"READER"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteRole",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/role/deleteRole/ADMIN",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"role",
+								"deleteRole",
+								"ADMIN"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "reader",
+			"item": [
+				{
+					"name": "getReaderById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnb2tjZXR1cmtlbEBnbWFpbC5jb20iLCJpYXQiOjE3MDE1MTQ2NTksImV4cCI6MTcwMTUyNDY1OSwiYXV0aG9yaXR5IjpbeyJhdXRob3JpdHkiOiJSRUFERVIifV19.Ik3NAT6Ud7RTb2Rse5OJNSEyJ3vdA7Uwx9LyXrQ0ERosTznxFBe-PvHu_luM2Mp3CLSr50ZrVLn8S7mJAOxRBQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/reader/getReaderById/mFQyKowBQ0G1tdq8nCXP",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reader",
+								"getReaderById",
+								"mFQyKowBQ0G1tdq8nCXP"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getReaderFollows",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnb2tjZXR1cmtlbEBnbWFpbC5jb20iLCJpYXQiOjE3MDE1MTQ2NTksImV4cCI6MTcwMTUyNDY1OSwiYXV0aG9yaXR5IjpbeyJhdXRob3JpdHkiOiJSRUFERVIifV19.Ik3NAT6Ud7RTb2Rse5OJNSEyJ3vdA7Uwx9LyXrQ0ERosTznxFBe-PvHu_luM2Mp3CLSr50ZrVLn8S7mJAOxRBQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/reader/getReaderFollows/mFQyKowBQ0G1tdq8nCXP",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reader",
+								"getReaderFollows",
+								"mFQyKowBQ0G1tdq8nCXP"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getReaderFollowers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnb2tjZXR1cmtlbEBnbWFpbC5jb20iLCJpYXQiOjE3MDE1MTQ2NTksImV4cCI6MTcwMTUyNDY1OSwiYXV0aG9yaXR5IjpbeyJhdXRob3JpdHkiOiJSRUFERVIifV19.Ik3NAT6Ud7RTb2Rse5OJNSEyJ3vdA7Uwx9LyXrQ0ERosTznxFBe-PvHu_luM2Mp3CLSr50ZrVLn8S7mJAOxRBQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/reader/getReaderFollowers/mFQyKowBQ0G1tdq8nCXP",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reader",
+								"getReaderFollowers",
+								"mFQyKowBQ0G1tdq8nCXP"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "follow",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnb2tjZXR1cmtlbEBnbWFpbC5jb20iLCJpYXQiOjE3MDE3MTg5ODgsImV4cCI6MTcwMTcyODk4OCwiYXV0aG9yaXR5IjpbeyJhdXRob3JpdHkiOiJSRUFERVIifV19.NAhGJyfhVTgTsVrVfLj8NKOBLaHeHO-l4NWTM4NIzUuPSsiKqqaxdJbhReNvLHN8-zb1U-9BD-OtxsSfxGM-jA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/reader/follow/mGJwNowBpQNm-wv3pAl0/mmJwNowBpQNm-wv3zglg",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reader",
+								"follow",
+								"mGJwNowBpQNm-wv3pAl0",
+								"mmJwNowBpQNm-wv3zglg"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "unfollow",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnb2tjZXR1cmtlbEBnbWFpbC5jb20iLCJpYXQiOjE3MDE3MTg5ODgsImV4cCI6MTcwMTcyODk4OCwiYXV0aG9yaXR5IjpbeyJhdXRob3JpdHkiOiJSRUFERVIifV19.NAhGJyfhVTgTsVrVfLj8NKOBLaHeHO-l4NWTM4NIzUuPSsiKqqaxdJbhReNvLHN8-zb1U-9BD-OtxsSfxGM-jA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/reader/unfollow/MFKONIwBmDpPiKeZZKAe/MlKONIwBmDpPiKeZsKBD",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reader",
+								"unfollow",
+								"MFKONIwBmDpPiKeZZKAe",
+								"MlKONIwBmDpPiKeZsKBD"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getReaderBookStatus",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnb2tjZXR1cmtlbEBnbWFpbC5jb20iLCJpYXQiOjE3MDE4ODc0NjUsImV4cCI6MTcwMTg5NzQ2NSwiYXV0aG9yaXR5IjpbeyJhdXRob3JpdHkiOiJSRUFERVIifV19.egDTY3FJZjiI7-LdCjP4PXp-uyXuLUK8Gpt3kjdSwcTsvfEBErr2YGugg9blrSxblU6FsZBKDSTwv4S7Splm1A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/reader/getBookStatus/l2JwNowBpQNm-wv3nglX/HqojQIwB3k2Vja-2SnX4",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reader",
+								"getBookStatus",
+								"l2JwNowBpQNm-wv3nglX",
+								"HqojQIwB3k2Vja-2SnX4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addCurrentlyBook",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnb2tjZXR1cmtlbEBnbWFpbC5jb20iLCJpYXQiOjE3MDE2MzQ2MTYsImV4cCI6MTcwMTY0NDYxNiwiYXV0aG9yaXR5IjpbeyJhdXRob3JpdHkiOiJSRUFERVIifV19.FgjlgUi_uDuSvm8_cfQBKWEDm3oKSoSSsjrqtW73mfjR45IZv5dM-FHpAOiZ4RE_hOKj1Uc90TE_5lT6fCf9RQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/reader/addCurrentlyBook/PgoMLIwBCURPa9fDe3Cf/Owr_K4wBCURPa9fD-nDu",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reader",
+								"addCurrentlyBook",
+								"PgoMLIwBCURPa9fDe3Cf",
+								"Owr_K4wBCURPa9fD-nDu"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addWantToReadBook",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnb2tjZXR1cmtlbEBnbWFpbC5jb20iLCJpYXQiOjE3MDE2MzQ2MTYsImV4cCI6MTcwMTY0NDYxNiwiYXV0aG9yaXR5IjpbeyJhdXRob3JpdHkiOiJSRUFERVIifV19.FgjlgUi_uDuSvm8_cfQBKWEDm3oKSoSSsjrqtW73mfjR45IZv5dM-FHpAOiZ4RE_hOKj1Uc90TE_5lT6fCf9RQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/reader/addWantToRead/PgoMLIwBCURPa9fDe3Cf/Owr_K4wBCURPa9fD-nDu",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reader",
+								"addWantToRead",
+								"PgoMLIwBCURPa9fDe3Cf",
+								"Owr_K4wBCURPa9fD-nDu"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addReadBook",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnb2tjZXR1cmtlbEBnbWFpbC5jb20iLCJpYXQiOjE3MDE2MzQ2MTYsImV4cCI6MTcwMTY0NDYxNiwiYXV0aG9yaXR5IjpbeyJhdXRob3JpdHkiOiJSRUFERVIifV19.FgjlgUi_uDuSvm8_cfQBKWEDm3oKSoSSsjrqtW73mfjR45IZv5dM-FHpAOiZ4RE_hOKj1Uc90TE_5lT6fCf9RQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/reader/addRead/PgoMLIwBCURPa9fDe3Cf/Owr_K4wBCURPa9fD-nDu",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reader",
+								"addRead",
+								"PgoMLIwBCURPa9fDe3Cf",
+								"Owr_K4wBCURPa9fD-nDu"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "searchReader",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnb2tjZXR1cmtlbEBnbWFpbC5jb20iLCJpYXQiOjE3MDE2MzQ2MTYsImV4cCI6MTcwMTY0NDYxNiwiYXV0aG9yaXR5IjpbeyJhdXRob3JpdHkiOiJSRUFERVIifV19.FgjlgUi_uDuSvm8_cfQBKWEDm3oKSoSSsjrqtW73mfjR45IZv5dM-FHpAOiZ4RE_hOKj1Uc90TE_5lT6fCf9RQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/reader/search/gökce",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reader",
+								"search",
+								"gökce"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateProfileImage",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnb2tjZXR1cmtlbEBnbWFpbC5jb20iLCJpYXQiOjE3MDE2MzQ2MTYsImV4cCI6MTcwMTY0NDYxNiwiYXV0aG9yaXR5IjpbeyJhdXRob3JpdHkiOiJSRUFERVIifV19.FgjlgUi_uDuSvm8_cfQBKWEDm3oKSoSSsjrqtW73mfjR45IZv5dM-FHpAOiZ4RE_hOKj1Uc90TE_5lT6fCf9RQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/kaank/Downloads/ecem_profile.webp"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8080/reader/updateProfileImage/Z8GbMYwBZV7z97fEXL0I",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reader",
+								"updateProfileImage",
+								"Z8GbMYwBZV7z97fEXL0I"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "startReadingChallenge",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnb2tjZXR1cmtlbEBnbWFpbC5jb20iLCJpYXQiOjE3MDE2ODQ1MjUsImV4cCI6MTcwMTY5NDUyNSwiYXV0aG9yaXR5IjpbeyJhdXRob3JpdHkiOiJSRUFERVIifV19.zZfFqO8NiHmhtACJyERg-pEyrlzaDEsTtPXpz7Q06UY_rxOs9lYhMefkHQxicdz0GYxP3mt79nsI-jL3u3bstw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/reader/startChallenge/Z8GbMYwBZV7z97fEXL0I/10",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reader",
+								"startChallenge",
+								"Z8GbMYwBZV7z97fEXL0I",
+								"10"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateReadingChallenge",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnb2tjZXR1cmtlbEBnbWFpbC5jb20iLCJpYXQiOjE3MDE2ODQ1MjUsImV4cCI6MTcwMTY5NDUyNSwiYXV0aG9yaXR5IjpbeyJhdXRob3JpdHkiOiJSRUFERVIifV19.zZfFqO8NiHmhtACJyERg-pEyrlzaDEsTtPXpz7Q06UY_rxOs9lYhMefkHQxicdz0GYxP3mt79nsI-jL3u3bstw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/reader/updateChallenge/Z8GbMYwBZV7z97fEXL0I/LlJNNIwBmDpPiKeZZaAN/PAoALIwBCURPa9fDpHBU",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reader",
+								"updateChallenge",
+								"Z8GbMYwBZV7z97fEXL0I",
+								"LlJNNIwBmDpPiKeZZaAN",
+								"PAoALIwBCURPa9fDpHBU"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "post",
+			"item": [
+				{
+					"name": "getUserFollowsPost",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnb2tjZXR1cmtlbEBnbWFpbC5jb20iLCJpYXQiOjE3MDE3MTg5ODgsImV4cCI6MTcwMTcyODk4OCwiYXV0aG9yaXR5IjpbeyJhdXRob3JpdHkiOiJSRUFERVIifV19.NAhGJyfhVTgTsVrVfLj8NKOBLaHeHO-l4NWTM4NIzUuPSsiKqqaxdJbhReNvLHN8-zb1U-9BD-OtxsSfxGM-jA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/post/getUserFollowsPost/mGJwNowBpQNm-wv3pAl0",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"post",
+								"getUserFollowsPost",
+								"mGJwNowBpQNm-wv3pAl0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createPost",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnb2tjZXR1cmtlbEBnbWFpbC5jb20iLCJpYXQiOjE3MDIxMTc1NjgsImV4cCI6MTcwMjEyNzU2OCwiYXV0aG9yaXR5IjpbeyJhdXRob3JpdHkiOiJSRUFERVIifV19.F_q-CCsT0Ypf70z_M4FTfwVOVqEQMG2nAp1aI1IULbaO8UKXdT_kgILgkAAS5ts-6L9j8_G-hB9zWwsmsKsQ_A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"KqloOYwBqUZNq4E3gqvX\",\r\n    \"fullName\": \"Ecem Kaplan\",\r\n    \"profilePictureUrl\": \"https://res.cloudinary.com/dspea8wm4/image/upload/v1701638455/default_profile_pic_szshsv.jpg\",\r\n    \"activity\": \"Read\",\r\n    \"bookId\": \"PH2NRYwBx22NHIIYLkEr\",\r\n    \"bookName\": \"Tek Adam\",\r\n    \"authorName\": \"Şevket Süreyya Aydemir\",\r\n    \"bookImageUrl\": \"http://res.cloudinary.com/dspea8wm4/image/upload/v1701973980/yuisysifzpxxprwfkbyi.jpg\",\r\n    \"rating\": 4.6\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/post/createPost",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"post",
+								"createPost"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "likePost",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnb2tjZXR1cmtlbEBnbWFpbC5jb20iLCJpYXQiOjE3MDE2ODg4NTUsImV4cCI6MTcwMTY5ODg1NSwiYXV0aG9yaXR5IjpbeyJhdXRob3JpdHkiOiJSRUFERVIifV19.uPQENsvTc1sK79JNcs7R4UfchxqQj23rtN-aEqsKriPUONZ0zCWNp_RyVPEFCaZ_30bBE41k7v7a1kqcmOMWhw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/post/likePost/MFKONIwBmDpPiKeZZKAe/M1KQNIwBmDpPiKeZU6Dl",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"post",
+								"likePost",
+								"MFKONIwBmDpPiKeZZKAe",
+								"M1KQNIwBmDpPiKeZU6Dl"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "unlikePost",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnb2tjZXR1cmtlbEBnbWFpbC5jb20iLCJpYXQiOjE3MDE2ODg4NTUsImV4cCI6MTcwMTY5ODg1NSwiYXV0aG9yaXR5IjpbeyJhdXRob3JpdHkiOiJSRUFERVIifV19.uPQENsvTc1sK79JNcs7R4UfchxqQj23rtN-aEqsKriPUONZ0zCWNp_RyVPEFCaZ_30bBE41k7v7a1kqcmOMWhw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/post/unlikePost/MFKONIwBmDpPiKeZZKAe/M1KQNIwBmDpPiKeZU6Dl",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"post",
+								"unlikePost",
+								"MFKONIwBmDpPiKeZZKAe",
+								"M1KQNIwBmDpPiKeZU6Dl"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "author",
+			"item": [
+				{
+					"name": "addAuthor",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnb2tjZXR1cmtlbEBnbWFpbC5jb20iLCJpYXQiOjE3MDI4NDc0ODksImV4cCI6MTcwMjg1NzQ4OSwiYXV0aG9yaXR5IjpbeyJhdXRob3JpdHkiOiJSRUFERVIifV19.9SEfGviY6bG3CO0Hm_uhLMPSAt1dGqGV3CZwdLIslW5H1TGfWpNaz-Of8WD8vg_BWwW8PKqorhliC4uXn-KHVw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fullName\": \"Şevket Süreyya Aydemir\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/author/addAuthor",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"author",
+								"addAuthor"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "book",
+			"item": [
+				{
+					"name": "addBook",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnb2tjZXR1cmtlbEBnbWFpbC5jb20iLCJpYXQiOjE3MDI4NDc0ODksImV4cCI6MTcwMjg1NzQ4OSwiYXV0aG9yaXR5IjpbeyJhdXRob3JpdHkiOiJSRUFERVIifV19.9SEfGviY6bG3CO0Hm_uhLMPSAt1dGqGV3CZwdLIslW5H1TGfWpNaz-Of8WD8vg_BWwW8PKqorhliC4uXn-KHVw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Tek Adam\",\r\n    \"description\": \"Şevket Süreyya Aydemir, Tek Adam’da, değişen bir dünyada çöken bir dinsel-geleneksel imparatorluktan ve Sevr’i imzalamış olan bir kalıntıdan, yepyeni bir ulusun, yepyeni bir devletin doğuşunu anlatıyor. Tek Adam, sadece Türk Devrimi’ni değil, aynı zamanda, Mustafa Kemal Atatürk’ün kişiliğinde, bir devrimciyi de çok iyi çözümleyen ve okuyucuya aktaran bir başyapıt.\",\r\n    \"pageNumber\": 392,\r\n    \"authorId\": \"d0C0eYwBSMJn_PLhzQ-x\",\r\n    \"genres\": [\"History\", \"Biography\", \"Research\"],\r\n    \"publishedDate\": 2020,\r\n    \"publisher\": \"Remzi Kitabevi\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/book/addBook",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"book",
+								"addBook"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addReviewToBook",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnb2tjZXR1cmtlbEBnbWFpbC5jb20iLCJpYXQiOjE3MDE5NzU4OTMsImV4cCI6MTcwMTk4NTg5MywiYXV0aG9yaXR5IjpbeyJhdXRob3JpdHkiOiJSRUFERVIifV19.R0bYF6KyQtUIBkikGMA75C-xM-7ljnt81pqHdbLC1gP2qZpmawnuooHFtczWyVV_COeYHyTb_PDNmPFQl0maig",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"mGJwNowBpQNm-wv3pAl0\",\r\n    \"fullName\": \"Gökçe Türkel\",\r\n    \"description\": \"Gayet güzel akıcı dille yazılmış bir roman.\",\r\n    \"star\": 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/book/addReviewToBook/PH2NRYwBx22NHIIYLkEr",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"book",
+								"addReviewToBook",
+								"PH2NRYwBx22NHIIYLkEr"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addImageToBook",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnb2tjZXR1cmtlbEBnbWFpbC5jb20iLCJpYXQiOjE3MDI4NDc0ODksImV4cCI6MTcwMjg1NzQ4OSwiYXV0aG9yaXR5IjpbeyJhdXRob3JpdHkiOiJSRUFERVIifV19.9SEfGviY6bG3CO0Hm_uhLMPSAt1dGqGV3CZwdLIslW5H1TGfWpNaz-Of8WD8vg_BWwW8PKqorhliC4uXn-KHVw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/kaank/Downloads/tekadam.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8080/book/addImageForBook/eEC2eYwBSMJn_PLhJQ-7",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"book",
+								"addImageForBook",
+								"eEC2eYwBSMJn_PLhJQ-7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getBookById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnb2tjZXR1cmtlbEBnbWFpbC5jb20iLCJpYXQiOjE3MDE4NzcxODIsImV4cCI6MTcwMTg4NzE4MiwiYXV0aG9yaXR5IjpbeyJhdXRob3JpdHkiOiJSRUFERVIifV19.uLjORiaY47gT5hycfpCA7LhIp8MbhhV-jUR_1fVCb7vX4t3oDPvVKoJCQZY9Oig2ZqUAKEiW_HsDRCPbOWOg8Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/book/getBookById/G6r3P4wB3k2Vja-2-XXJ",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"book",
+								"getBookById",
+								"G6r3P4wB3k2Vja-2-XXJ"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnb2tjZXR1cmtlbEBnbWFpbC5jb20iLCJpYXQiOjE3MDIxNjMwOTQsImV4cCI6MTcwMjE3MzA5NCwiYXV0aG9yaXR5IjpbeyJhdXRob3JpdHkiOiJSRUFERVIifV19.89jf1c03ljoYo0FmwWO61WFzwyJ1TU5R3Rr7CaLvx-wqzHiUUo49CSeKqju7qV0lL8qdFppxqMuGdtq9YBDZtQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/book/search/tek",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"book",
+								"search",
+								"tek"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "genre",
+			"item": [
+				{
+					"name": "addGenre",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnb2tjZXR1cmtlbEBnbWFpbC5jb20iLCJpYXQiOjE3MDI4NDc0ODksImV4cCI6MTcwMjg1NzQ4OSwiYXV0aG9yaXR5IjpbeyJhdXRob3JpdHkiOiJSRUFERVIifV19.9SEfGviY6bG3CO0Hm_uhLMPSAt1dGqGV3CZwdLIslW5H1TGfWpNaz-Of8WD8vg_BWwW8PKqorhliC4uXn-KHVw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/genre/addGenre/History",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"genre",
+								"addGenre",
+								"History"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addBooksToGenre",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnb2tjZXR1cmtlbEBnbWFpbC5jb20iLCJpYXQiOjE3MDI4NDc0ODksImV4cCI6MTcwMjg1NzQ4OSwiYXV0aG9yaXR5IjpbeyJhdXRob3JpdHkiOiJSRUFERVIifV19.9SEfGviY6bG3CO0Hm_uhLMPSAt1dGqGV3CZwdLIslW5H1TGfWpNaz-Of8WD8vg_BWwW8PKqorhliC4uXn-KHVw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"bookId\": \"dECyeYwBSMJn_PLh2A-r\",\r\n        \"title\": \"Ortadoğu\",\r\n        \"description\": \"Hıristiyanlığın başlangıcından günümüze Ortadoğu’nun iki bin yıllık tarihini dünyaca ünlü tarihçi Bernard Lewis’in bilimsel bir yaklaşımla ve etkileyici bir dille anlattığı kitabı 'Ortadoğu'.Üç büyük dinin ve pek çok uygarlığın doğum yeri olan Ortadoğu bölgesi tarih boyunca nice savaşlara, nice göçlere, nice gelişimlere, değişimlere şahit olmuş, ev sahipliği yapmıştır. Kimi zaman uygarlıkları birleştiren köprü görevini üstlenmiş kimi zamansa dinler arası büyük çatışmalara sahne olmuştur.\",\r\n        \"pageNumber\": 560,\r\n        \"author\": {\r\n            \"books\": [],\r\n            \"userId\": \"c0CxeYwBSMJn_PLh5w9I\",\r\n            \"fullName\": \"Bernard Lewis\"\r\n        },\r\n        \"genres\": [\r\n            \"History\",\r\n            \"Research\",\r\n            \"Politics\"\r\n        ],\r\n        \"publishedDate\": 2017,\r\n        \"publisher\": \"Arkadaş Yayınları\",\r\n        \"bookImage\": {\r\n            \"imageId\": \"btb9ocrlfawzykrsfcvc\",\r\n            \"imageUrl\": \"http://res.cloudinary.com/dspea8wm4/image/upload/v1702848826/btb9ocrlfawzykrsfcvc.jpg\"\r\n        },\r\n        \"rating\": {\r\n            \"oneStarCount\": 0,\r\n            \"twoStarCount\": 0,\r\n            \"threeStarCount\": 0,\r\n            \"fourStarCount\": 0,\r\n            \"fiveStarCount\": 0,\r\n            \"totalStarCount\": 0,\r\n            \"meanOfRating\": 0\r\n        },\r\n        \"reviews\": []\r\n    },\r\n    {\r\n        \"bookId\": \"bECoeYwBSMJn_PLhQQ-S\",\r\n        \"title\": \"Almanlar Üzerine İncelemeler\",\r\n        \"description\": \"Monarşiden Weimar’a, Nazi ülkesinden Federal Almanya’ya uzanan bir hikâye; fantasmaların, incitilmiş yaşamların, körkütük sarhoşlukların ve görülmemiş bir barbarlığın damga vurduğu bir yolculuk. Öğrenci birliklerinin, Freikorp’ların, SS’lerin ve son olarak Marksist gençlerin seyrini değiştireceği bu yolculuk büyük yenilgiler ve bölünmelerle hafızalara kazınacaktır.\",\r\n        \"pageNumber\": 512,\r\n        \"author\": {\r\n            \"books\": [],\r\n            \"userId\": \"a0CneYwBSMJn_PLh7Q_9\",\r\n            \"fullName\": \"Norbert Elias\"\r\n        },\r\n        \"genres\": [\r\n            \"History\",\r\n            \"Research\"\r\n        ],\r\n        \"publishedDate\": 2023,\r\n        \"publisher\": \"Alfa Yayınları\",\r\n        \"bookImage\": {\r\n            \"imageId\": \"xgwqhxa0mscwsvyxcco6\",\r\n            \"imageUrl\": \"http://res.cloudinary.com/dspea8wm4/image/upload/v1702848133/xgwqhxa0mscwsvyxcco6.jpg\"\r\n        },\r\n        \"rating\": {\r\n            \"oneStarCount\": 0,\r\n            \"twoStarCount\": 0,\r\n            \"threeStarCount\": 0,\r\n            \"fourStarCount\": 0,\r\n            \"fiveStarCount\": 0,\r\n            \"totalStarCount\": 0,\r\n            \"meanOfRating\": 0\r\n        },\r\n        \"reviews\": []\r\n    },\r\n    {\r\n        \"bookId\": \"ckCweYwBSMJn_PLh6g-O\",\r\n        \"title\": \"Kayıp Aydınlanma\",\r\n        \"description\": \"Görsellerle zenginleştirilmiş bu sürükleyici kitap Orta Asya’nın orta çağdaki karanlıkta kalmış olan Aydınlanma Çağı’nı tarihi sıralamaya sadık kalarak ama kuru bir anlatımdan çıkartarak ortaya koyuyor. Dönemin en büyük zihinlerinin maceralı hayatları, büyüleyici başarıları ve modern dünyanın oluşumunu nasıl hazırladıklarını açık bir dille anlatan eser, olup biteni sebep-sonuç dairesi içinde okura sunarak zihinlerdeki sorulara cevap veriyor.\",\r\n        \"pageNumber\": 702,\r\n        \"author\": {\r\n            \"books\": [],\r\n            \"userId\": \"cUCveYwBSMJn_PLhsw-c\",\r\n            \"fullName\": \"S. Frederick Starr\"\r\n        },\r\n        \"genres\": [\r\n            \"History\",\r\n            \"Research\"\r\n        ],\r\n        \"publishedDate\": 2021,\r\n        \"publisher\": \"Kronik Kitap\",\r\n        \"bookImage\": {\r\n            \"imageId\": \"hobxgjbwhxgbgzdp3w27\",\r\n            \"imageUrl\": \"http://res.cloudinary.com/dspea8wm4/image/upload/v1702848700/hobxgjbwhxgbgzdp3w27.jpg\"\r\n        },\r\n        \"rating\": {\r\n            \"oneStarCount\": 0,\r\n            \"twoStarCount\": 0,\r\n            \"threeStarCount\": 0,\r\n            \"fourStarCount\": 0,\r\n            \"fiveStarCount\": 0,\r\n            \"totalStarCount\": 0,\r\n            \"meanOfRating\": 0\r\n        },\r\n        \"reviews\": []\r\n    },\r\n    {\r\n        \"bookId\": \"Z0CjeYwBSMJn_PLh7g_j\",\r\n        \"title\": \"Fransız Devrimi\",\r\n        \"description\": \"Tüm dünyada halkların kaderini belirleyen tarihin bu en istisnai beş yılına kuş uçuşu bir bakış atmaya hazır mısınız? Elinizdeki kitapta sadece Robespierre’leri, Danton’ları, kafasını giyotine uzatmış mağrur bir kralı ya da genç ve muhteris bir Napolyon Bonapart’ı bulmayacaksınız. Karşınıza, kapitalist ekonominin yarattığı taleplere cevap veremeyen müflis bir krallık, her yerde hain aranan bir cinnet ortamı, doğrudan yönetimin tüm kusurlarını sergileyen bir anarşi\",\r\n        \"pageNumber\": 88,\r\n        \"author\": {\r\n            \"books\": [],\r\n            \"userId\": \"ZkCjeYwBSMJn_PLhZQ9j\",\r\n            \"fullName\": \"Emrah Safa Gürkan\"\r\n        },\r\n        \"genres\": [\r\n            \"History\",\r\n            \"Research\"\r\n        ],\r\n        \"publishedDate\": 2022,\r\n        \"publisher\": \"Teras Kitap\",\r\n        \"bookImage\": {\r\n            \"imageId\": \"rdqeygcbzkja7zkw0wne\",\r\n            \"imageUrl\": \"http://res.cloudinary.com/dspea8wm4/image/upload/v1702847851/rdqeygcbzkja7zkw0wne.jpg\"\r\n        },\r\n        \"rating\": {\r\n            \"oneStarCount\": 0,\r\n            \"twoStarCount\": 0,\r\n            \"threeStarCount\": 0,\r\n            \"fourStarCount\": 0,\r\n            \"fiveStarCount\": 0,\r\n            \"totalStarCount\": 0,\r\n            \"meanOfRating\": 0\r\n        },\r\n        \"reviews\": []\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/genre/addBooksToGenre/fEDCeYwBSMJn_PLhpw_J",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"genre",
+								"addBooksToGenre",
+								"fEDCeYwBSMJn_PLhpw_J"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getall",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJnb2tjZXR1cmtlbEBnbWFpbC5jb20iLCJpYXQiOjE3MDE5NzMwMjgsImV4cCI6MTcwMTk4MzAyOCwiYXV0aG9yaXR5IjpbeyJhdXRob3JpdHkiOiJSRUFERVIifV19.bMrJt15XdLrGeiolBaqlQWKmSZRg-St6v1ZnBnBABs8E60PIEjZVZOQ_PpJbOA6uSQ9WxrIQCKlVnVPLFU_KPQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/genre/getall",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"genre",
+								"getall"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

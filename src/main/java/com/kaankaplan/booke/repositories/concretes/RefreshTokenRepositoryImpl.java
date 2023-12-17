@@ -1,7 +1,7 @@
 package com.kaankaplan.booke.repositories.concretes;
 
 import com.kaankaplan.booke.modals.RefreshToken;
-import com.kaankaplan.booke.repositories.abstracts.RefreshTokenRepository;
+import com.kaankaplan.booke.business.abstracts.abstracts.RefreshTokenRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;

@@ -3,7 +3,7 @@ package com.kaankaplan.booke.repositories.concretes;
 import co.elastic.clients.elasticsearch._types.query_dsl.FuzzyQuery;
 import co.elastic.clients.elasticsearch._types.query_dsl.QueryBuilders;
 import com.kaankaplan.booke.modals.Reader;
-import com.kaankaplan.booke.repositories.abstracts.ReaderRepository;
+import com.kaankaplan.booke.business.abstracts.abstracts.ReaderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.elasticsearch.client.elc.NativeQuery;

@@ -1,4 +1,4 @@
-package com.kaankaplan.booke.repositories.abstracts;
+package com.kaankaplan.booke.business.abstracts.abstracts;
 
 import com.kaankaplan.booke.modals.RegistrableUser;
 
