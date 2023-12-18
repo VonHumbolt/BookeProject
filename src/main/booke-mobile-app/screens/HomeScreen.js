@@ -22,17 +22,18 @@ const HomeScreen = () => {
 
   useEffect(() => {
     SecureStore.getItemAsync("email").then((email) => {
-      readerService.getReaderByEmail(email).then((res) => {
-        postService
-          .getUserFollowsPost(res.data.data.userId, 0, 5)
-          .then((response) => {
-            if (response.data.success) {
-              setPosts(response.data.data);
-              setReader(res.data.data);
-            }
-          });
-        SecureStore.setItemAsync("readerId", res.data.data.userId);
-      });
+      if(isFocused)
+        readerService.getReaderByEmail(email).then((res) => {
+          postService
+            .getUserFollowsPost(res.data.data.userId, 0, 5)
+            .then((response) => {
+              if (response.data.success) {
+                setPosts(response.data.data);
+                setReader(res.data.data);
+              }
+            });
+          SecureStore.setItemAsync("readerId", res.data.data.userId);
+        });
     });
   }, [isFocused]);
 

@@ -1,7 +1,9 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 
-const CurrentStats = ({ read, wantToReads, currentlyBooks, navigation }) => {
+const CurrentStats = ({ read, wantToReads, currentlyBooks }) => {
+  const navigation = useNavigation()
   return (
     <View className="p-6 bg-white shadow-lg">
       <View className="flex-row items-center justify-between">

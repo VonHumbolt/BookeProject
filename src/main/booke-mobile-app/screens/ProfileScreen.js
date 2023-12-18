@@ -5,6 +5,7 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
@@ -31,6 +32,7 @@ const ProfileScreen = () => {
   const [reader, setReader] = useState();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [image, setImage] = useState(null);
+  const [isImageLoading, setIsImageLoading] = useState(false);
 
   useEffect(() => {
     SecureStore.getItemAsync("email").then((email) => {
@@ -61,8 +63,12 @@ const ProfileScreen = () => {
 
     const formData = new FormData();
     formData.append("image", { uri: image.uri, name: filename, type });
+    setIsImageLoading(true)
     readerService.updateProfileImage(reader?.userId, formData).then((res) => {
-      if (res.data.success) setImage(image.uri);
+      if (res.data.success) {
+        setImage(image.uri);
+        setIsImageLoading(false)
+      }
     });
   };
 
@@ -87,11 +93,11 @@ const ProfileScreen = () => {
       authService.logout(refreshRequestDto).then((res) => {
         if (res.data.success) {
           SecureStore.deleteItemAsync("token");
-          SecureStore.deleteItemAsync("refreshToken");
           SecureStore.deleteItemAsync("email");
           SecureStore.deleteItemAsync("userId");
           SecureStore.deleteItemAsync("readerId");
-          setIsMenuOpen(false)
+          SecureStore.deleteItemAsync("refreshToken");
+          setIsMenuOpen(false);
           navigation.navigate("Login");
         }
       });
@@ -101,6 +107,13 @@ const ProfileScreen = () => {
   return (
     <SafeAreaView className="bg-[#E07A5F] flex-1">
       <View className="py-6 pr-8 pl-8 flex-row items-center">
+        {isImageLoading && (
+          <ActivityIndicator
+            className="absolute top-10 left-16 z-20 mt-3"
+            size="large"
+            color="#C44536"
+          />
+        )}
         <TouchableOpacity
           className="absolute top-4 right-5"
           onPress={() => setIsMenuOpen(!isMenuOpen)}
@@ -183,7 +196,6 @@ const ProfileScreen = () => {
           read={reader?.readBooks}
           wantToReads={reader?.wantToReadBooks}
           currentlyBooks={reader?.currentlyBooks}
-          navigation={navigation}
         />
 
         {/* Want To Reads */}

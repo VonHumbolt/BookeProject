@@ -102,6 +102,8 @@ public class AuthServiceImpl implements AuthService {
         if (refreshToken == null)
             return new ErrorResult(Constant.REFRESH_TOKEN_IS_NOT_FOUND);
 
+        log.info("RefreshToken ---> " + refreshToken.refreshToken);
+
         refreshTokenService.deleteToken(refreshRequestDto.refreshToken());
         return new SuccessResult(Constant.LOGOUT);
     }

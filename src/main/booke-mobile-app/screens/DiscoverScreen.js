@@ -126,7 +126,7 @@ const DiscoverScreen = ({ navigation }) => {
           <View className="px-8 py-3 flex-row items-center bg-white shadow-lg">
             <Image
               source={{
-                uri: "http://res.cloudinary.com/dspea8wm4/image/upload/v1702235315/skqsyxycd3njmqinasda.jpg",
+                uri: "http://res.cloudinary.com/dspea8wm4/image/upload/v1702848909/bgyl68lpadokdtnb5mi0.jpg",
               }}
               width={100}
               height={100}
@@ -140,7 +140,7 @@ const DiscoverScreen = ({ navigation }) => {
                 className="flex-row items-center mt-3 mr-2"
                 onPress={() =>
                   navigation.navigate("BookDetail", {
-                    bookId: "4XwhVYwB5cZWij2NaRHT",
+                    bookId: "dkC0eYwBSMJn_PLhHg-m",
                   })
                 }
               >
