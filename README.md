@@ -141,3 +141,13 @@ You can download it via the Play Store or App Store.
 
 10. After you installed Expo Go. Open your QR Scanner and scan the QR Code
 which appears on the screen after running the <strong>nxp expo start</strong> command.
+
+## Trailer of the Project
+
+<div align="center">
+    
+https://github.com/VonHumbolt/BookeProject/assets/79381882/fccc970a-ffa9-4b1d-aa41-0dd5321c2584
+    
+</div>
+
+
