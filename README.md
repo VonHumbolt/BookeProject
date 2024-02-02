@@ -25,7 +25,7 @@ and they can view the posts of these users. Also, they can like and comment on t
     <li>Spring Security</li>
     <li>Spring Data Elasticsearch</li>
     <li>Spring Data Redis</li>
-    <li>Elasticsearch</li>
+    <li>Elasticsearch 8.10</li>
     <li>Redis</li>
     <li>Docker</li>
     <li>Jwt</li>
